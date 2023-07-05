@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/06/26 20:56:26 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:05:43 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)argc;
 	env = init_env(envp);
+	ft_export(env, "TEST", "42");
+	ft_unset(env, "TERM_SESSION_ID");
+	//if_dollar(env, "TEST");
 	while (42)
 	{
 		if ((s->line = readline("minishell$ ")) == NULL)
@@ -75,8 +78,7 @@ int	main(int argc, char **argv, char **envp)
 			exit(EXIT_SUCCESS);
 		}
 		add_history(s->line);
-		//ft_env(env);
-		ft_lexer(s);
+		ft_lexer(s, env);
 		ft_free(s->lexer);
 	}
 	return (0);

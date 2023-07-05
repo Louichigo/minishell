@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/06/26 20:50:33 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:05:33 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@ typedef struct s_env
 	char	*name;
 	char	*value;
 	struct s_env *next;
+	struct s_env *previous;
 }	t_env;
 
-void	ft_lexer(t_data *s);
+void	ft_lexer(t_data *s, t_env *env);
 void	if_dollar(t_env *env, char *str);
 void	exec_cmd(char **cmd);
 void	ft_free(char **str);
 void	ft_pwd(void);
 void	ft_env(t_env *env);
-void	ft_export(t_env *env, char const *name, char const *value);
-void	ft_unset(t_env *env, char const *name);
+void	ft_export(t_env *env, char *name, char *value);
+void	ft_unset(t_env *env, char *name);
 
 t_env	*init_env(char **envp);
 

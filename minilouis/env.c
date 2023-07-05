@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/06/22 16:22:21 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/07/05 13:27:45 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ t_env	*init_env(char **envp)
 	i = 0;
 	(void)envp;
 	env = (t_env *)malloc(sizeof(env));
-	env->name = strdup("");
-	env->value = strdup("");
+	env->name = ft_strdup(ft_splitname(envp[i]));
+	env->value = ft_strdup(ft_splitvalue(envp[i]));
 	env->next = NULL;
+	env->previous = NULL;
+	i++;
 	while (envp[i])
 	{
 		name = ft_splitname(envp[i]);

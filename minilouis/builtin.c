@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:26:30 by lobertho          #+#    #+#             */
-/*   Updated: 2023/06/26 20:52:54 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:35:02 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,35 +60,51 @@ void	ft_pwd(void)
 }
 */
 
-void	ft_unset(t_env *env, char const *name)
+void	ft_unset(t_env *env, char *name)
 {
 	t_env *curr = env;
 
 	while (curr)
 	{
-		if (strcmp(curr->name, name) == 0)
+		if (ft_strcmp(curr->name, name) == 0)
 		{
-			curr->value = strdup("");
-			curr->name = strdup("");
+			if (!curr->previous)
+			{
+				curr->next->previous = NULL;
+				t_env *temp = curr;
+				curr = curr->next;
+				free(temp->name);
+				free(temp->value);
+				temp = NULL;
+				free(temp);
+				return;
+			}
+			else if (!curr->next)
+				curr->previous->next = NULL;
+			else
+			{
+				curr->previous->next = curr->next;
+				curr->next->previous = curr->previous;
+			}
 			free(curr->value);
 			free(curr->name);
+			curr = NULL;
+			free(curr);
 			return;
 		}
 		if (!curr->next)
 			break;
 		curr = curr->next;
-	}
-
-	
+	}	
 }
 
-void	ft_export(t_env *env, char const *name, char const *value)
+void	ft_export(t_env *env, char *name, char *value)
 {
 	t_env *curr = env;
 
 	while (curr)
 	{
-		if (strcmp(curr->name, name) == 0)
+		if (ft_strcmp(curr->name, name) == 0)
 		{
 			strcpy(curr->value, value);
 			return ;
@@ -98,16 +114,16 @@ void	ft_export(t_env *env, char const *name, char const *value)
 		curr = curr->next;
 	}
 	t_env *new_var = (t_env *)malloc(sizeof(t_env));
-	new_var->name = strdup(name);
-	new_var->value = strdup(value);
+	new_var->name = ft_strdup(name);
+	new_var->value = ft_strdup(value);
 	new_var->next = NULL;
 	curr->next = new_var;
+	curr->next->previous = curr;
 }
 
 void	ft_env(t_env *env)
 {
 	t_env *curr = env;
-	curr = curr->next;
 	while (curr)
 	{
 		printf("%s=%s\n", curr->name, curr->value);		
