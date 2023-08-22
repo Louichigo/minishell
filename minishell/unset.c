@@ -3,28 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/07/13 18:08:15 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:37:45 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	suppfirst(t_env **env)
+void	removefirst(t_env **root)
 {
-	if (*env == NULL)
-		return;
-	t_env *supp = *env;
-	*env = (*env)->next;
-	free(supp->value);
-	free(supp->name);
-	free(supp);
+	t_env *temp = *root;
+	*root = (*root)->next;
+	free(temp->value);
+	free(temp->name);
+	temp = 0;
+	free(temp);
 }
-
-
-
 
 
 void	ft_unset(t_env *env, char *name)
@@ -38,7 +34,7 @@ void	ft_unset(t_env *env, char *name)
 			if (!curr->previous)
 			{
 				curr->next->previous = NULL;
-				suppfirst(&curr);
+				removefirst(&curr);
 				return;
 			}
 			else if (!curr->next)
@@ -57,5 +53,5 @@ void	ft_unset(t_env *env, char *name)
 		if (!curr->next)
 			break;
 		curr = curr->next;
-	}	
+	}
 }

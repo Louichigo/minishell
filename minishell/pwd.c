@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/22 17:24:04 by lobertho         ###   ########.fr       */
+/*   Created: 2023/08/21 12:37:36 by lobertho          #+#    #+#             */
+/*   Updated: 2023/08/21 12:37:49 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_lexer(t_data *s, t_env *env)
+void	ft_pwd(void)
 {
-	s->lexer = ft_split(s->line, ' ');
-	if (ft_strcmp(s->line, "env") == 0)
-		ft_env(env);
-	if (ft_strcmp(s->line, "pwd") == 0)
-		ft_pwd();
-	if (ft_strcmp(s->line, "exit") == 0)
-		ft_exit(env);
-	free(s->line);
-	
-}
+	char *cwd;
 
+	cwd = malloc(PATH_MAX);
+	if (getcwd(cwd, PATH_MAX) != NULL)
+		printf("%s\n", cwd);
+	else
+		perror("getcwd()");
+	free(cwd);
+}

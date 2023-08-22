@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 12:54:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/22 19:13:39 by lobertho         ###   ########.fr       */
+/*   Created: 2023/08/21 12:38:44 by lobertho          #+#    #+#             */
+/*   Updated: 2023/08/22 15:21:00 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while(str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-void	ft_freeenv(t_env *env)
+void	ft_export(t_env *env, char *name, char *value)
 {
 	t_env *curr = env;
+
 	while (curr)
 	{
-		free(curr->name);
-		free(curr->value);
+		if (ft_strcmp(curr->name, name) == 0)
+		{
+			free(curr->value);
+			curr->value = ft_strdup(value);
+			return ;
+		}
+		if (!curr->next) 
+			break;
 		curr = curr->next;
 	}
-	free(curr);
-	free(env);	
+	t_env *new_var = (t_env *)malloc(sizeof(t_env));
+	new_var->name = ft_strdup(name);
+	new_var->value = ft_strdup(value);
+	new_var->next = NULL;
+	curr->next = new_var;
+	curr->next->previous = curr;
 }
