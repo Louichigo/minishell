@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/22 19:15:11 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:25:16 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,34 @@ void	exec_cmd(char **cmd, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	*s;
+	t_token	*tok;
 	t_env	*env;
-	//char *args[] = {"ls", "-l", "-a", "-F", NULL};
+	char	*input;
+	//char *args[] = {"ls", "-la", NULL};
 
-	s = (t_data *)malloc(sizeof(t_data));
-	if (!s)
+	tok = (t_token *)malloc(sizeof(t_token));
+	if (!tok)
 		return (-1);
-	signalsinit();
 	(void)argv;
 	(void)argc;
 	env = init_env(envp);
-	//ft_unset(env, "TERM_SESSION_ID");
+	signalsinit();
+	//ft_env(env);
+	//ft_export(env, "TEST", "42");
+	//ft_unset(&env, "TERM_SESSION_ID");
 	//exec_cmd(args, envp);
+	//ft_exit(env);
+	//ft_cd(env, "~");
+	//ft_pwd();
+	//ft_echo("test salut", 0);
 	while (42)
 	{
-		if ((s->line = readline("minishell$ ")) == NULL)
+		if ((input = readline("minishell$ ")) == NULL)
 			ft_exit(env); // ctrl+d = exit
-		add_history(s->line);
-		ft_lexer(s, env);
-		ft_free(s->lexer);
+		add_history(input);
+		//parser(input, env);
+		//ft_free(input);
 	}
+	rl_clear_history();
 	return (0);
 }

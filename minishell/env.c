@@ -6,13 +6,36 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/21 15:29:17 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:39:16 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//creer l'environnement et y ajouter les variables deja presentent
+//fonction qui creer les maillons de l'environnement
+void	createnode(t_env **env, char *name, char *value)
+{
+	t_env *newvar = malloc(sizeof(t_env));
+
+	newvar->name = ft_strdup(name);
+	newvar->value = ft_strdup(value);
+	newvar->previous = NULL;
+	newvar->next = NULL;
+	if (*env == NULL)
+	{
+		*env = newvar;
+		return ;
+	}
+	t_env *curr = *env;
+	while (curr->next != NULL)
+	{
+		curr = curr->next;
+	}
+	curr->next = newvar;
+	curr->next->previous = curr;
+}
+
+//initialisation de l'environnement 
 t_env	*init_env(char **envp)
 {
 	t_env	*env;
@@ -21,18 +44,12 @@ t_env	*init_env(char **envp)
 	char	*value;
 
 	i = 0;
-	(void)envp;
-	env = (t_env *)malloc(sizeof(env));
-	env->name = ft_strdup(ft_splitname(envp[i]));
-	env->value = ft_strdup(ft_splitvalue(envp[i]));
-	env->next = NULL;
-	env->previous = NULL;
-	i++;
+	env = NULL;
 	while (envp[i])
 	{
 		name = ft_splitname(envp[i]);
 		value = ft_splitvalue(envp[i]);
-		ft_export(env, name, value);
+		createnode(&env, name, value);
 		free(name);
 		free(value);
 		i++;
@@ -44,53 +61,11 @@ t_env	*init_env(char **envp)
 void	ft_env(t_env *env)
 {
 	t_env *curr = env;
-	while (curr)
+	while (curr != NULL)
 	{
-		printf("%s=%s\n", curr->name, curr->value);		
+		printf("%s=%s\n", curr->name, curr->value);
 		curr = curr->next;
 	}
-}
-
-char *ft_splitname(char *str)
-{
-	int		i;
-	char	*name;
-
-	i = 0;
-	while (str[i] != '=')
-		i++;
-	name = malloc(sizeof(char) * i + 1);
-	i = 0;
-	while(str[i] != '=')
-	{
-		name[i] = str[i];
-		i++;
-	}
-	name[i] = '\0';
-	return (name);
-}
-
-char *ft_splitvalue(char *str)
-{
-	int		i;
-	int		j;
-	char	*value;
-
-	i = 0;
-	j = 0;
-	while (str[i] != '=')
-		i++;
-	i++;
-	j = i;
-	while (str[i])
-		i++;
-	i = i - j;
-	value = malloc(sizeof(char) * i + 1);
-	i = 0;
-	while (str[j] != '\0')
-		value[i++] = str[j++];
-	value[i] = '\0';
-	return (value);
 }
 
 // recuperer la valeur de la variable voulue et l'afficher

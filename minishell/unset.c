@@ -6,26 +6,15 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/21 15:37:45 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:02:29 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	removefirst(t_env **root)
+void	ft_unset(t_env **env, char *name)
 {
-	t_env *temp = *root;
-	*root = (*root)->next;
-	free(temp->value);
-	free(temp->name);
-	temp = 0;
-	free(temp);
-}
-
-
-void	ft_unset(t_env *env, char *name)
-{
-	t_env *curr = env;
+	t_env *curr = *env;
 
 	while (curr)
 	{
@@ -33,8 +22,19 @@ void	ft_unset(t_env *env, char *name)
 		{
 			if (!curr->previous)
 			{
-				curr->next->previous = NULL;
-				removefirst(&curr);
+				t_env	*tempnode = *env;
+				if (*env == NULL)
+					return ;
+				if (tempnode->next == NULL)
+				{
+					*env = NULL;
+					return;
+				}
+				*env = (*env)->next;
+				(*env)->previous = NULL;
+				free(tempnode->name);
+				free(tempnode->value);
+				free(tempnode);
 				return;
 			}
 			else if (!curr->next)

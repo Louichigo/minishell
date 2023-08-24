@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:38:44 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/22 15:21:00 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:52:05 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_export(t_env *env, char *name, char *value)
 			break;
 		curr = curr->next;
 	}
-	t_env *new_var = (t_env *)malloc(sizeof(t_env));
+	t_env *new_var = malloc(sizeof(t_env));
 	new_var->name = ft_strdup(name);
 	new_var->value = ft_strdup(value);
 	new_var->next = NULL;
