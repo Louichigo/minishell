@@ -6,13 +6,12 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 23:16:21 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:16:14 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// si echo avec dollar alors check et faire if_dollars
 void	ft_echo(char *str, int echon)
 {
 	write(1, str, ft_strlen(str));
@@ -38,7 +37,7 @@ void	ft_echo_parse(t_token *s, t_env *env)
 		i = 1;
 	str = ft_echon(s->arg, i);
 	dollar = ft_finddollar(s, env, str);
-	if (dollar == NULL)
+	if (dollar == NULL || s->dollartemp == 0)
 	{
 		ft_echo(str, i);
 		free(str);
@@ -67,12 +66,12 @@ char *ft_jenpeuxplus(t_token *s, char *str, char *dollar)
 
 	i = 0;
 	j = 0;
-	len = ft_strlen(str) - s->count + ft_strlen(dollar);
+	len = ft_strlen(str) - (s->count + 1) + ft_strlen(dollar);
 	newstr = malloc(sizeof(char) * len + 1);
 	len = 0;
-	while (str[len] == 36)
+	while (str[len] != 36)
 		newstr[i++] = str[len++];
-	while (str[len] != '\0' || str[len] != 32)
+	while (str[len] != '\0' && str[len] != 32)
 		len++;
 	while (dollar[j])
 	{
@@ -86,27 +85,29 @@ char *ft_jenpeuxplus(t_token *s, char *str, char *dollar)
 
 char	*ft_finddollar(t_token *s, t_env *env, char *str)
 {
-	int	i;
-	int	start;
+	int		i;
+	int		start;
+	char	*newstr;
 
 	i = 0;
+	newstr = NULL;
 	s->count = 0;
 	start = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
 		if (str[i] == 36)
 		{
 			i++;
 			start = i;
-			while (str[i] != '\0' || str[i] != 32)
+			while (str[i] != '\0' && str[i] != 32)
 				i++;
 			s->count = i - start;
-			return (ft_putdollar(env, str, s->count));
+			newstr = ft_putdollar(s, env, str, s->count);
+			return (newstr);
 		}
 		i++;
-
 	}
-	return (NULL);
+	return (newstr);
 }
 
 char *ft_echon(char **str, int i)

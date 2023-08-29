@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 23:05:32 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:12:55 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	int					type;
+	int					dollartemp;
 	int					count;
 	int					flag;
 	int					error;
@@ -108,10 +109,10 @@ char 	*ft_splitvalue(char *str);
 char	**ft_split(char const *s, char c);
 char	*ft_dechar(char **str);
 char	*ft_echon(char **str, int i);
-char	*if_dollar(t_env *env, char *str);
+char	*if_dollar(t_token *s, t_env *env, char *str);
 char	*ft_finddollar(t_token *s, t_env *env, char *str);
-char	*ft_putdollar(t_env *env, char *str, int len);
-char *ft_jenpeuxplus(t_token *s, char *str, char *dollar);
+char	*ft_putdollar(t_token *s, t_env *env, char *str, int len);
+char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar);
 
 int	is_builtin(t_token *s);
 int	ft_fulllen(char **str, int i);

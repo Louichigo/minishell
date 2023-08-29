@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 23:06:22 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:11:24 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	ft_env(t_env *env, t_token *s)
 	}
 }
 
-// recuperer la valeur de la variable voulue
-char	*if_dollar(t_env *env, char *str)
+char	*if_dollar(t_token *s, t_env *env, char *str)
 {
 	t_env *curr = env;
 
+	s->dollartemp = 0;
 	while (curr)
 	{
 		if (strcmp(curr->name, str) == 0)
@@ -86,6 +86,7 @@ char	*if_dollar(t_env *env, char *str)
 			free(str);
 			str = NULL;
 			str = ft_strdup(curr->value);
+			s->dollartemp = 1;
 			return (str);
 		}
 		if (!curr->next) 
