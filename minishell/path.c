@@ -6,17 +6,18 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:24:52 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/21 16:25:39 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:52:08 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_all_path() //getenv path and splits it
+char	**get_all_path(t_env *env) //getenv path and splits it
 {
 	char **all_paths;
    
-	all_paths = ft_split(getenv("PATH"), ':');
+	(void)env;
+	all_paths = ft_split(find_var(env, "PATH"), ':');
 	if (all_paths == NULL)
 	{
 		ft_free(all_paths);
@@ -26,7 +27,7 @@ char	**get_all_path() //getenv path and splits it
 		return (all_paths);
 }
 
-char *get_right_path(char *cmd) //finds right path for cmd
+char *get_right_path(t_env *env, char *cmd) //finds right path for cmd
 {
 	int     i;
 	char    *temp;
@@ -34,7 +35,8 @@ char *get_right_path(char *cmd) //finds right path for cmd
 	char    *path;
 
 	i = -1;
-	all_paths = get_all_path();
+	(void)env;
+	all_paths = get_all_path(env);
 	while (all_paths && all_paths[++i])
 	{
 		temp = ft_strjoin(all_paths[i], "/");

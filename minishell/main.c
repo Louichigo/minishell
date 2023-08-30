@@ -6,13 +6,13 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 16:04:01 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:39:43 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_cmd(char **cmd, char **envp)
+void	exec_cmd(t_env *env, char **cmd, char **envp)
 {
 	int	pid = 0;
 	int status = 0;
@@ -27,7 +27,7 @@ void	exec_cmd(char **cmd, char **envp)
 	}
 	else
 	{
-		if (execve(get_right_path(*cmd), cmd, envp) == -1)
+		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
 			perror("shell");
 		exit(EXIT_FAILURE);
 	}
@@ -53,8 +53,5 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		free(input);
 	}
-	free(input);
-	clear_history();
-	//free env
 	return (0);
 }

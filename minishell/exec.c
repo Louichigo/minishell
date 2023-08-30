@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 15:20:33 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:41:46 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execution(t_token *s, t_env *env)
 	else
 	{
 		parse_exec(s);
-		exec_cmd(s->arg_all, NULL);
+		exec_cmd(env, s->arg_all, NULL);
 		ft_freeall(s->arg_all);
 	}
 }
