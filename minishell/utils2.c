@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 21:46:03 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:38:14 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,23 @@ int	ft_fulllen(char **str, int i)
 {
 	int	j;
 	int	count;
+	int	toremove;
 
 	j = 0;
+	toremove = 0;
 	count = 0;
 	while (str[i])
 	{
 		while (str[i][j])
+		{
+			if (str[i][j] == '\\' && str[i][j + 1] > 32 && str[i][j - 1] != 92)
+				toremove++;
 			j++;
+		}
 		j++;
 		i++;
 		count = j;
 		j = 0;
 	}
-	return (count);
+	return (count - toremove);
 }

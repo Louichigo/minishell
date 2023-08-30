@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/29 17:16:14 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:50:46 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_echo(char *str, int echon)
 	if (echon == 0)
 		write(1, "\n", 1);
 }
-//doit gerer les \\\\ correctement
 
 void	ft_echo_parse(t_token *s, t_env *env)
 {
@@ -49,13 +48,6 @@ void	ft_echo_parse(t_token *s, t_env *env)
 	free(str);
 	free(dollar);
 }
-
-//regarder si ya un dollar puis jusqua plus de majuscules et rien de colle apres
-//faire une string ou ya que ca puis l envoyer a if dollar
-//si ct une variable if dollar laura remplacer par la value
-//mais de toute facon on refait une string avec tt ce qui ya avant
-//puis la nouvelle string qui peut etre identique mais blc
-//puis ce quil y avait apres
 
 char *ft_jenpeuxplus(t_token *s, char *str, char *dollar)
 {
@@ -95,7 +87,7 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str)
 	start = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == 36)
+		if (str[i] == 36 && str[i - 1] != '\\')
 		{
 			i++;
 			start = i;
@@ -124,7 +116,12 @@ char *ft_echon(char **str, int i)
 	{
 		j = 0;
 		while (str[i][j])
-			newstr[k++] = str[i][j++];
+		{
+			if (str[i][j] == '\\' && str[i][j + 1] > 32 && str[i][j - 1] != 92)
+				j++;
+			else
+				newstr[k++] = str[i][j++];
+		}
 		i++;
 		if (str[i])
 			newstr[k++] = 32;

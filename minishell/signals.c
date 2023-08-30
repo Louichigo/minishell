@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:05:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/25 11:18:21 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/30 12:02:17 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	handler(int num)
 	if (num == SIGINT)  //sigint = ctrl+c nouveau prompt
 	{
 		write(1, "\n", 1);
-//		rl_replace_line("", 0);
-//		rl_on_new_line();
-//		rl_redisplay();
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:54:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/25 13:51:28 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/30 14:20:56 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	free_double(t_token *token)
 		free(token->arg);
 	}
 	i = -1;
-	if (token->arg_all)
+	/*if (token->arg_all)
 	{
 		while (token->arg_all[++i])
 			free(token->arg_all[i]);
 		free(token->arg_all);
-	}
+	}*/
 	i = -1;
 	if (token->g_env)
 	{

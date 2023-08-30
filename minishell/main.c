@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/29 16:52:51 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:38:59 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int argc, char **argv, char **envp)
 	signalsinit();
 	while (42)
 	{
-		//if ((input = readline("minishell >> ")) == NULL)
-		//	ft_exit(env); // ctrl+d = exit
+		/*if ((input = readline("minishell >> ")) == NULL)
+			ft_exit(env);*/ // ctrl+d = exit
 		input = readline("minishell >> ");
 		if (input == NULL || input[0] == '\0')
 			continue;

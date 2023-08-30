@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/29 17:12:55 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:17:24 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	int					type;
+	int					sizearg;
 	int					dollartemp;
 	int					count;
 	int					flag;
@@ -95,6 +96,7 @@ void	ft_unset_parse(t_token *s, t_env *env);
 void	ft_cd_parse(t_token *s, t_env *env);
 void	ft_echo_parse(t_token *s, t_env *env);
 void	execution(t_token *s, t_env *env);
+void	parse_exec(t_token *s);
 
 t_env	*init_env(char **envp);
 
@@ -113,10 +115,12 @@ char	*if_dollar(t_token *s, t_env *env, char *str);
 char	*ft_finddollar(t_token *s, t_env *env, char *str);
 char	*ft_putdollar(t_token *s, t_env *env, char *str, int len);
 char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar);
+void	ft_freeall(char **str);
 
 int	is_builtin(t_token *s);
 int	ft_fulllen(char **str, int i);
 int	ft_strcmp(char *s1, char *s2);
+int	ft_arglen(t_token *s);
 
 //tokenizer.c
 int				sequencer(t_token **head, char *input, t_env *envi, int index);
