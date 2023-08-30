@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 13:50:46 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:18:19 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_echo(char *str, int echon)
 void	ft_echo_parse(t_token *s, t_env *env)
 {
 	char	*str;
-	char	*dollar;
+	char	*dollar = NULL;
 	char	*finalstr;
 	int		i;
 
@@ -35,8 +35,9 @@ void	ft_echo_parse(t_token *s, t_env *env)
 	if (ft_strcmp(s->arg[0], "-n") == 0)
 		i = 1;
 	str = ft_echon(s->arg, i);
-	dollar = ft_finddollar(s, env, str);
-	if (dollar == NULL || s->dollartemp == 0)
+	if (s->issquote != 1)
+		dollar = ft_finddollar(s, env, str);
+	if (dollar == NULL || s->dollartemp == 0 || s->issquote == 1)
 	{
 		ft_echo(str, i);
 		free(str);

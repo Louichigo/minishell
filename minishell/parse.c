@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 19:01:07 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:14:33 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	check_quotes(char *input)
 
 void	parser(char	*input, t_env *envi)
 {
-	t_token	*head;
+	t_token *head;
 	int		i;
 
 	i = 0;
@@ -66,6 +66,7 @@ void	parser(char	*input, t_env *envi)
 void	initialize_sequence(t_token *new, t_env *envi, int index)
 {
 	new->cmd = NULL;
+	new->issquote = 0;
 	new->arg = NULL;
 	new->next = NULL;
 	new->flag_env[0] = -1;

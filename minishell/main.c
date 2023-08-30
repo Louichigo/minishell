@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 13:38:59 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:04:01 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,9 @@ void	exec_cmd(char **cmd, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_token	*tok;
 	t_env	*env;
 	char	*input;
 
-	tok = (t_token *)malloc(sizeof(t_token));
-	if (!tok)
-		return (-1);
 	(void)argv;
 	(void)argc;
 	env = init_env(envp);

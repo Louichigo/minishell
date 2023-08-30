@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 14:17:24 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:04:23 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_env
 
 typedef struct s_token
 {
+	int					issquote;
 	int					type;
 	int					sizearg;
 	int					dollartemp;
@@ -172,7 +173,7 @@ char			*get_filename(t_token *new, char *input);
 //parser.c
 
 bool			check_quotes(char *input);
-void			parser(char *input, t_env *envi);
+void			parser(char	*input, t_env *envi);
 void			initialize_sequence(t_token *new, t_env *envi, int index);
 
 #endif 

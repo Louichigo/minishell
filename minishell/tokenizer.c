@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:50:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/25 14:08:01 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/30 16:17:18 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void	get_arg(t_token *new, char *input)
 	{
 		space_index(new, input);
 		if (input[new->i] == '\'')
+		{	new->issquote = 1;
 			get_squote(new, input);
+		}
 		else if (input[new->i] == '"')
 			get_dquote(new, input);
 		else if (isredi(input[new->i]))
