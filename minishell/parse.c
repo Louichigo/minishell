@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 17:49:17 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:04:21 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	parser(char	*input, t_env *envi)
 	}
 	if (!head->error)
 	{
-//		replace_usd(head);
+		replace_dollar(head);
 		execution(head, envi);
 		//print_list(head);
 	}

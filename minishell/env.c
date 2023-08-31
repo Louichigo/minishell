@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/29 17:11:24 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:06:50 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,18 @@ t_env	*init_env(char **envp)
 }
 
 //afficher l'environnement
-void	ft_env(t_env *env, t_token *s)
+int		ft_env(t_env *env, t_token *s)
 {
 	t_env *curr = env;
 
 	if (s->arg[0])
-	{
-		perror("error");
-		return ;
-	}
+		return (1);
 	while (curr != NULL)
 	{
 		printf("%s=%s\n", curr->name, curr->value);
 		curr = curr->next;
 	}
+	return (0);
 }
 
 char	*if_dollar(t_token *s, t_env *env, char *str)

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:52:09 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 21:50:16 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:17:36 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,22 @@ int	is_builtin(t_token *s)
 	return (is);
 }
 
-void	exec_builtin(t_token *s, t_env *env)
+int	exec_builtin(t_token *s, t_env *env)
 {
 	if (ft_strcmp(s->cmd, "exit") == 0)
-		ft_exit(env);
+		globalv = ft_exit(env);
 	else if (ft_strcmp(s->cmd, "env") == 0)
-		ft_env(env, s);
+		globalv = ft_env(env, s);
 	else if (ft_strcmp(s->cmd, "unset") == 0) //premier segfault
-		ft_unset_parse(s, env);
+		globalv = ft_unset_parse(s, env);
 	else if (ft_strcmp(s->cmd, "export") == 0)
-		ft_export_parse(s, env);
+		globalv = ft_export_parse(s, env);
 	else if (ft_strcmp(s->cmd, "pwd") == 0)
-		ft_pwd();
+		globalv = ft_pwd();
 	else if (ft_strcmp(s->cmd, "cd") == 0)
-		ft_cd_parse(s, env);
+		globalv = ft_cd_parse(s, env);
 	else if (ft_strcmp(s->cmd, "echo") == 0) //!!!!!!!!!!
-		ft_echo_parse(s, env);
+		globalv = ft_echo_parse(s, env);
+	return (globalv);
 }
 

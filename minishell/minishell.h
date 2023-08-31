@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 17:51:27 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:17:19 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define STDOUT 1
 # define STDERR 2
 
-int		globalv;
+extern int	globalv;
 
 typedef struct s_env
 {
@@ -75,27 +75,26 @@ enum e_token {
 	RR_RIGHT = 7,
 };
 
-void	ft_exit(t_env *env);
 void	ft_echo(char *str, int echon);
 void	exec_cmd(t_env *env, char **cmd, char **envp);
 void	ft_free(char **str);
 void	free_token(t_token **token);
 void	free_double(t_token *token);
 void	ft_freeenv(t_env *env);
-void	ft_pwd(void);
-void	ft_env(t_env *env, t_token *s);
+int		ft_pwd(void);
+int		ft_env(t_env *env, t_token *s);
 void	ft_export(t_env *env, char *name, char *value);
 void	ft_unset(t_env **env, char *name);
-void	ft_exit(t_env *env);
-void	ft_cd(t_env *env, char *str);
+int		ft_exit(t_env *env);
+int		ft_cd(t_env *env, char *str);
 void	signalsinit(void);
 void	ft_putstr_fd(char *s, int fd);
 void	add_tab(t_token *token, int new);
-void	exec_builtin(t_token *s, t_env *env);
-void	ft_export_parse(t_token *s, t_env *env);
-void	ft_unset_parse(t_token *s, t_env *env);
-void	ft_cd_parse(t_token *s, t_env *env);
-void	ft_echo_parse(t_token *s, t_env *env);
+int		exec_builtin(t_token *s, t_env *env);
+int		ft_export_parse(t_token *s, t_env *env);
+int		ft_unset_parse(t_token *s, t_env *env);
+int		ft_cd_parse(t_token *s, t_env *env);
+int		ft_echo_parse(t_token *s, t_env *env);
 void	execution(t_token *s, t_env *env);
 void	parse_exec(t_token *s);
 
@@ -124,6 +123,9 @@ int	is_builtin(t_token *s);
 int	ft_fulllen(char **str, int i);
 int	ft_strcmp(char *s1, char *s2);
 int	ft_arglen(t_token *s);
+
+char	*ft_itoa(int n);
+void	replace_dollar(t_token *tok);
 
 //tokenizer.c
 int				sequencer(t_token **head, char *input, t_env *envi, int index);

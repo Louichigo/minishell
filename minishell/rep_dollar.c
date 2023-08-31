@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   rep_dollar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgross <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 12:37:36 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 12:13:40 by cgross           ###   ########.fr       */
+/*   Created: 2023/08/30 16:11:26 by cgross            #+#    #+#             */
+/*   Updated: 2023/08/30 17:58:46 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(void)
+void	replace_dollar(t_token *tok)
 {
-	char *cwd;
+	int	i;
 
-	cwd = malloc(PATH_MAX);
-	if (getcwd(cwd, PATH_MAX) != NULL)
-		printf("%s\n", cwd);
-	else
+	i = 0;
+	while (tok->arg[i])
 	{
-		perror("getcwd()");
-		return (1);
-	}	
-	free(cwd);
-	return (0);
+		if (tok->arg[i][0] == '$')
+		{
+			if (tok->arg[i][1] == '?')
+			{
+				free(tok->arg[i]);
+				tok->arg[i] = ft_itoa(globalv);
+			}
+		}
+		i++;
+	}
 }

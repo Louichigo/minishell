@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 16:18:19 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:15:09 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_echo(char *str, int echon)
 		write(1, "\n", 1);
 }
 
-void	ft_echo_parse(t_token *s, t_env *env)
+int		ft_echo_parse(t_token *s, t_env *env)
 {
 	char	*str;
 	char	*dollar = NULL;
@@ -30,7 +30,7 @@ void	ft_echo_parse(t_token *s, t_env *env)
 	if (s->arg[0] == NULL)
 	{
 		printf("\n");
-		return ;
+		return (0);
 	}
 	if (ft_strcmp(s->arg[0], "-n") == 0)
 		i = 1;
@@ -41,13 +41,14 @@ void	ft_echo_parse(t_token *s, t_env *env)
 	{
 		ft_echo(str, i);
 		free(str);
-		return;
+		return (0);
 	}
 	finalstr = ft_jenpeuxplus(s, str, dollar);
 	ft_echo(finalstr, i);
 	free(finalstr);
 	free(str);
 	free(dollar);
+	return (0);
 }
 
 char *ft_jenpeuxplus(t_token *s, char *str, char *dollar)

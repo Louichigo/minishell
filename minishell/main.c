@@ -6,11 +6,13 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 17:39:43 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:05:44 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int globalv = 0;
 
 void	exec_cmd(t_env *env, char **cmd, char **envp)
 {

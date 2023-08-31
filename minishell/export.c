@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:38:44 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 18:40:22 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:17:09 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_export(t_env *env, char *name, char *value)
 	curr->next->previous = curr;
 }
 
-void	ft_export_parse(t_token *s, t_env *env)
+int		ft_export_parse(t_token *s, t_env *env)
 {
 	char *str;
 
@@ -47,4 +47,5 @@ void	ft_export_parse(t_token *s, t_env *env)
 	ft_export(env, s->exportname, s->exportvalue);
 	free(s->exportname);
 	free(s->exportvalue);
+	return (0);
 }

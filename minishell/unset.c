@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 20:36:01 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:16:40 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_unset(t_env **env, char *name)
 	}
 }
 
-void	ft_unset_parse(t_token *s, t_env *env)
+int		ft_unset_parse(t_token *s, t_env *env)
 {
 	char *str;
 
@@ -65,4 +65,5 @@ void	ft_unset_parse(t_token *s, t_env *env)
 	printf("%s\n", str);
 	ft_unset(&env, str);
 	free(str);	
+	return (0);
 }

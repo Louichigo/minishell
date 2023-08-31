@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:46:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/28 20:18:26 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:21:35 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*find_var(t_env *env, char *name)
 	return (NULL);
 }
 
-void	ft_cd(t_env *env, char *str)
+int		ft_cd(t_env *env, char *str)
 {
 	char *cwd;
 
@@ -42,7 +42,7 @@ void	ft_cd(t_env *env, char *str)
 		if (chdir(find_var(env, "HOME")) != 0)
 		{
 			perror("$HOME error");
-			return;
+			return (1);
 		}
 	}
 	else if (ft_strcmp(str, "-") == 0)
@@ -50,13 +50,13 @@ void	ft_cd(t_env *env, char *str)
 		if (chdir(find_var(env, "OLDPWD")) != 0)
 		{
 			perror("$OLDPWD error");
-			return;
+			return (1);
 		}
 	}
     else if (chdir(str) != 0)
 	{
 		perror("chdir error");
-		return;
+		return (1);
 	}
 	ft_export(env, "OLDPWD", cwd);
 	free(cwd);
@@ -64,17 +64,22 @@ void	ft_cd(t_env *env, char *str)
 	getcwd(cwd, PATH_MAX);
 	ft_export(env, "PWD", cwd);
 	free(cwd);
+	return (0);
 }
 
-void	ft_cd_parse(t_token *s, t_env *env)
+int		ft_cd_parse(t_token *s, t_env *env)
 {
-	char *str;
+	char	*str;
+	int		ret;
+
+	ret = 0;
 	if (s->arg[0] == NULL)
 	{
 		ft_cd(env, "");
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	str = ft_dechar(s->arg);
-	ft_cd(env, str);
+	ret = ft_cd(env, str);
 	free(str);
+	return (ret);
 }
