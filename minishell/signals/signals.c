@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:05:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 12:02:02 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 12:48:48 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	handler(int num)
 	{
 		write(1, "\n", 1);
 //		rl_replace_line("", 0);
-//		rl_on_new_line();
-//		rl_redisplay();
+		rl_on_new_line();
+		rl_redisplay();
+		globalv = 1;
 	}
 }
 
