@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 18:06:50 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 13:00:19 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //fonction qui creer les maillons de l'environnement
 void	createnode(t_env **env, char *name, char *value)

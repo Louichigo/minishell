@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:24:52 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/30 17:52:08 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:00:53 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	**get_all_path(t_env *env) //getenv path and splits it
 {

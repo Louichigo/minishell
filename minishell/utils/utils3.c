@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 22:48:58 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/29 17:11:15 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:02:18 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*ft_putdollar(t_token *s, t_env *env, char *str, int len)
 {

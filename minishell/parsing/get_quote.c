@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_quote.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:02:23 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/25 14:06:34 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 13:01:07 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	get_squote_cmd(t_token *new, char *input)
 {

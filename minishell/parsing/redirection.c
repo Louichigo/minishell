@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:42:53 by cgross            #+#    #+#             */
-/*   Updated: 2023/08/25 14:20:08 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 13:01:31 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	r_left(t_token	*new, char *input)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rep_dollar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:11:26 by cgross            #+#    #+#             */
-/*   Updated: 2023/08/30 17:58:46 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 13:00:57 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	replace_dollar(t_token *tok)
 {
