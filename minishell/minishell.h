@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 12:17:19 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:32:40 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
 
 # define STDIN 0
 # define STDOUT 1
@@ -126,6 +127,8 @@ int	ft_arglen(t_token *s);
 
 char	*ft_itoa(int n);
 void	replace_dollar(t_token *tok);
+
+void	init_termios(void);
 
 //tokenizer.c
 int				sequencer(t_token **head, char *input, t_env *envi, int index);
