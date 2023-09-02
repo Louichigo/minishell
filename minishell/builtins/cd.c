@@ -6,7 +6,7 @@
 /*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:46:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:10 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/02 16:07:39 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_cd(t_env *env, char *str)
 	}
     else if (chdir(str) != 0)
 	{
-		perror("chdir error");
+		perror("shell: cd");
 		return (1);
 	}
 	ft_export(env, "OLDPWD", cwd);
