@@ -6,7 +6,7 @@
 /*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:24:52 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:53 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/02 15:54:08 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	**get_all_path(t_env *env) //getenv path and splits it
 		return (all_paths);
 }
 
-char *get_right_path(t_env *env, char *cmd) //finds right path for cmd
+//finds right path for cmd, returns cmd if absolute path is found in env
+char *get_right_path(t_env *env, char *cmd)
 {
 	int     i;
 	char    *temp;
@@ -35,16 +36,17 @@ char *get_right_path(t_env *env, char *cmd) //finds right path for cmd
 	char    *path;
 
 	i = -1;
-	(void)env;
 	all_paths = get_all_path(env);
 	while (all_paths && all_paths[++i])
 	{
 		temp = ft_strjoin(all_paths[i], "/");
 		path = ft_strjoin(temp, cmd);
-		if (access(path, X_OK) != -1)
+		if (access(path, X_OK) != -1 || access(cmd, X_OK) != -1)
 		{
 			free(temp);
 			ft_free(all_paths);
+			if (access(cmd, X_OK) != -1)
+				return (cmd);
 			return (path);
 		}
 		free(path);
