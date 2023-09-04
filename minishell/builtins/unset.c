@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:40 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:26:02 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+/*t_env *temp = *env;
+	if (temp->next == NULL)
+	{
+		*env = NULL;
+		return;
+	}
+	*env = (*env)->next;
+	(*env)->previous = NULL;
+	free(temp->name);
+	free(temp->value);
+	free(temp);*/
 
 void	ft_unset(t_env **env, char *name)
 {
@@ -22,19 +33,17 @@ void	ft_unset(t_env **env, char *name)
 		{
 			if (!curr->previous)
 			{
-				t_env	*tempnode = *env;
-				if (*env == NULL)
-					return ;
-				if (tempnode->next == NULL)
+				t_env *temp = *env;
+				if (temp->next == NULL)
 				{
 					*env = NULL;
 					return;
 				}
-				*env = (*env)->next;
+				(*env) = (*env)->next;
 				(*env)->previous = NULL;
-				free(tempnode->name);
-				free(tempnode->value);
-				free(tempnode);
+				free(temp->name);
+				free(temp->value);
+				free(temp);
 				return;
 			}
 			else if (!curr->next)
@@ -60,9 +69,7 @@ int		ft_unset_parse(t_token *s, t_env *env)
 {
 	char *str;
 
-	(void)env;
 	str = ft_dechar(s->arg);
-	printf("%s\n", str);
 	ft_unset(&env, str);
 	free(str);	
 	return (0);

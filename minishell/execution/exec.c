@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:48 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 12:26:29 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	execution(t_token *s, t_env *env)
 {
+
 	if (is_builtin(s) == 1)
 		exec_builtin(s, env);
-	//else if (//dollar)
 	else
 	{
 		parse_exec(s);

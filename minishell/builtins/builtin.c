@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:52:09 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:06 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:46:15 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_builtin(t_token *s)
 int	exec_builtin(t_token *s, t_env *env)
 {
 	if (ft_strcmp(s->cmd, "exit") == 0)
-		globalv = ft_exit(env);
+		globalv = ft_exit_parse(s, env);
 	else if (ft_strcmp(s->cmd, "env") == 0)
 		globalv = ft_env(env, s);
 	else if (ft_strcmp(s->cmd, "unset") == 0) //premier segfault

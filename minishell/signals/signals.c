@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:05:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 14:34:49 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 11:30:06 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	handler(int num)
 void	signalsinit(void)
 {
 	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN); //sigquit = ne rien faire / sig ign dit ignorer le signal
+	signal(SIGQUIT, handler); //sigquit = ne rien faire / sig ign dit ignorer le signal
 }

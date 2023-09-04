@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 14:32:40 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 13:58:39 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int		ft_pwd(void);
 int		ft_env(t_env *env, t_token *s);
 void	ft_export(t_env *env, char *name, char *value);
 void	ft_unset(t_env **env, char *name);
-int		ft_exit(t_env *env);
+int		ft_exit_parse(t_token *s, t_env *env);
+void	ft_exit(t_env *env, int i);
 int		ft_cd(t_env *env, char *str);
 void	signalsinit(void);
 void	ft_putstr_fd(char *s, int fd);
