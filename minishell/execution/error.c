@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:12:13 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 15:12:26 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:35:33 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ int	ft_error(char *cmd)
 	}
 	if (cmd)
 		ft_putstr_fd("error: command not found\n", 2);
-	else
-		return (127);
-	return (1);
+	return (127);
 }

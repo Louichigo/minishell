@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 12:26:29 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:33:22 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,44 @@
 
 void	execution(t_token *s, t_env *env)
 {
-
-	if (is_builtin(s) == 1)
-		exec_builtin(s, env);
-	else
+	if (!s->next)
 	{
-		parse_exec(s);
-		exec_cmd(env, s->arg_all, NULL);
-		ft_freeall(s->arg_all);
+		if (is_builtin(s) == 1)
+			exec_builtin(s, env);
+		else
+		{
+			parse_exec(s);
+			exec_cmd(env, s->arg_all, NULL);
+			ft_freeall(s->arg_all);
+		}
 	}
+	else if (s->next)
+	{
+		//pipe
+	}
+	else
+		printf("POURQUOI\n");
 }
 
-void	ft_freeall(char **str)
+void	exec_cmd(t_env *env, char **cmd, char **envp)
 {
-	int i;
+	int	pid = 0;
+	int status = 0;
 
-	i = 0;
-	while (str[i])
+	pid = fork();
+	if (pid == -1)
+		perror("fork");
+	if (pid == 0)
 	{
-		free(str[i]);
-		i++;
+		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
+			globalv = ft_error(*cmd);
 	}
-	free(str);
+	else
+	{
+		wait(&status);
+		if (WIFEXITED(status))
+			globalv = WEXITSTATUS(status);
+	}
 }
 
 void	parse_exec(t_token *s)
