@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 11:45:50 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:57:00 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_exit(env);*/ // ctrl+d = exit
 		signalsinit();
 		input = readline("minishell >> ");
-		if (input == NULL || input[0] == '\0')
+		if (input == NULL || input[0] == '\0' || fullspace(input) == 0)
 			continue;
 		parser(input, env);
 		add_history(input);

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 13:58:39 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:56:39 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str);
 char	*ft_putdollar(t_token *s, t_env *env, char *str, int len);
 char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar);
 char	*find_var(t_env *env, char *name);
+int		fullspace(char *input);
 
 void	ft_freeall(char **str);
 

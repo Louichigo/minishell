@@ -6,7 +6,7 @@
 /*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 22:48:58 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:02:18 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:56:10 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ char	*ft_putdollar(t_token *s, t_env *env, char *str, int len)
 	}
 	dstr = if_dollar(s, env, newstr);
 	return (dstr);
+}
+
+int		fullspace(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
 }
