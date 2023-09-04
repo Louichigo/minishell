@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 14:56:39 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/04 15:12:45 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		ft_cd_parse(t_token *s, t_env *env);
 int		ft_echo_parse(t_token *s, t_env *env);
 void	execution(t_token *s, t_env *env);
 void	parse_exec(t_token *s);
+int	ft_error(char *cmd);
 
 t_env	*init_env(char **envp);
 
