@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:26:30 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 14:07:01 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:59:33 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_exit_parse(t_token *s, t_env *env)
 	int		i;
 
 	i = 0;
-	if (s->arg == NULL)
+	if (s->arg[0] == NULL)
 	{
 		ft_exit(env, 0);
 		return (0);
