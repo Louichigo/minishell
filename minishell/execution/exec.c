@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 11:29:42 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/05 14:20:53 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	execution(t_token *s, t_env *env)
 		else
 		{
 			parse_exec(s);
-			exec_cmd(env, s->arg_all, NULL);
+			exec_cmd(s, env, s->arg_all, NULL);
 			ft_freeall(s->arg_all);
 		}
 	}
@@ -33,7 +33,7 @@ void	execution(t_token *s, t_env *env)
 		printf("POURQUOI\n");
 }
 
-void	exec_cmd(t_env *env, char **cmd, char **envp)
+void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp)
 {
 	int	pid = 0;
 	int status = 0;
@@ -44,8 +44,8 @@ void	exec_cmd(t_env *env, char **cmd, char **envp)
 	if (pid == 0)
 	{
 		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
-			globalv = ft_error(*cmd);
-		exit(EXIT_SUCCESS);
+			globalv = ft_error(s, *cmd);
+		exit(errno);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 12:33:32 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:53:40 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*env;
 	char	*input;
 
-	(void)argv;
-	(void)argc;
+	(void)argv; 
+	if (argc != 1)
+	{
+		printf("invalid args,try ./minishell\n");
+		return (1);
+	}
 	env = init_env(envp);
-	//init_termios();
+	init_termios();
 	signalsinit();
 	while (42)
 	{
@@ -38,6 +42,5 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 		}
 	}
-	rl_clear_history();
 	return (globalv);
 }

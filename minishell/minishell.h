@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 16:38:16 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/05 14:21:30 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+#include <errno.h>
 
 # define STDIN 0
 # define STDOUT 1
@@ -77,7 +78,7 @@ enum e_token {
 };
 
 void	ft_echo(char *str, int echon);
-void	exec_cmd(t_env *env, char **cmd, char **envp);
+void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp);
 void	ft_free(char **str);
 void	free_token(t_token **token);
 void	free_double(t_token *token);
@@ -99,7 +100,7 @@ int		ft_cd_parse(t_token *s, t_env *env);
 int		ft_echo_parse(t_token *s, t_env *env);
 void	execution(t_token *s, t_env *env);
 void	parse_exec(t_token *s);
-int	ft_error(char *cmd);
+int	ft_error(t_token *s, char *cmd);
 
 t_env	*init_env(char **envp);
 
