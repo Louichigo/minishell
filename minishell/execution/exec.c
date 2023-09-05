@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 14:20:53 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:26:03 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,19 @@ void	execution(t_token *s, t_env *env)
 	}
 	else if (s->next)
 	{
-		//pipe
+		char *cmd1;
+		char *cmd2;
+		parse_exec(s);
+		cmd1 = ft_clabonne(s->arg_all);
+		ft_freeall(s->arg_all);
+		s = s->next;
+		parse_exec(s);
+		cmd2 = ft_clabonne(s->arg_all);
+		ft_freeall(s->arg_all);
+		globalv = pipex(s, env, cmd1, cmd2);
 	}
 	else
-		printf("POURQUOI\n");
+		printf("PAS NORMAL \n");
 }
 
 void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp)
@@ -44,8 +53,8 @@ void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp)
 	if (pid == 0)
 	{
 		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
-			globalv = ft_error(s, *cmd);
-		exit(errno);
+			ft_error(s, *cmd);
+		exit(globalv);
 	}
 	else
 	{
@@ -82,12 +91,34 @@ void	parse_exec(t_token *s)
 	s->arg_all[i] = NULL;
 }
 
-int	ft_arglen(t_token *s)
+char	*ft_clabonne(char **str)
 {
-	int i;
+	char	*newstr;
+	int		i;
+	int		len;
+	int		j;
 
 	i = 0;
-	while (s->arg[i])
+	j = 0;
+	while (str[i])
+	{
+		len = 0;
+		while (str[i][len] != '\0')
+			len++;
 		i++;
-	return (i);
+		j += len;
+	}
+	newstr = malloc(sizeof(char) * j + 1 + i);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		len = 0;
+		while (str[i][len])
+			newstr[j++] = str[i][len++];
+		newstr[j++] = 32;
+		i++;
+	}
+	newstr[j] = '\0';
+	return (newstr);
 }

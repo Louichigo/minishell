@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 14:21:30 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:25:46 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef struct s_env
 
 typedef struct s_token
 {
+	const char			*path[2];
+	char *const			*cmdd[2];
+	int					file[2];
+	int					pipe[2];
+	int					pid[2];
+	int					exit;
 	int					issquote;
 	int					type;
 	int					sizearg;
@@ -64,6 +70,7 @@ typedef struct s_token
 	char				**arg;
 	char				**g_env;
 	char				**arg_all;
+	char				**secondcmd;
 	struct s_token		*next;
 }				t_token;
 
@@ -100,7 +107,10 @@ int		ft_cd_parse(t_token *s, t_env *env);
 int		ft_echo_parse(t_token *s, t_env *env);
 void	execution(t_token *s, t_env *env);
 void	parse_exec(t_token *s);
-int	ft_error(t_token *s, char *cmd);
+void	ft_error(t_token *s, char *cmd);
+int		pipex(t_token *s, t_env *env, char *cmd1, char *cmd2);
+char	*ft_clabonne(char **str);
+char	*ft_strchr(const char *s, int c);
 
 t_env	*init_env(char **envp);
 
