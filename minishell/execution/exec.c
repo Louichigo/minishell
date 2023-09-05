@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 17:33:22 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:29:42 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	exec_cmd(t_env *env, char **cmd, char **envp)
 	{
 		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
 			globalv = ft_error(*cmd);
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
