@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 22:48:58 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 18:23:16 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:30:06 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_putdollar(t_token *s, t_env *env, char *str, int len)
 				newstr[j++] = str[i++];
 			}
 			newstr[j] = '\0';
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -41,7 +41,7 @@ char	*ft_putdollar(t_token *s, t_env *env, char *str, int len)
 	return (dstr);
 }
 
-int		fullspace(char *input)
+int	fullspace(char *input)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ int		fullspace(char *input)
 
 int	ft_arglen(t_token *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s->arg[i])

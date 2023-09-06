@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:02:13 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:30:17 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *ft_splitname(char *str)
+char	*ft_splitname(char *str)
 {
 	int		i;
 	char	*name;
@@ -22,7 +22,7 @@ char *ft_splitname(char *str)
 		i++;
 	name = malloc(sizeof(char) * i + 1);
 	i = 0;
-	while(str[i] != '=')
+	while (str[i] != '=')
 	{
 		name[i] = str[i];
 		i++;
@@ -31,7 +31,7 @@ char *ft_splitname(char *str)
 	return (name);
 }
 
-char *ft_splitvalue(char *str)
+char	*ft_splitvalue(char *str)
 {
 	int		i;
 	int		j;

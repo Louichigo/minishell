@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:24:52 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/02 15:54:08 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:46:03 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**get_all_path(t_env *env) //getenv path and splits it
+char	**get_all_path(t_env *env)
 {
-	char **all_paths;
-   
+	char	**all_paths;
+
 	(void)env;
 	all_paths = ft_split(find_var(env, "PATH"), ':');
 	if (all_paths == NULL)
@@ -27,13 +27,12 @@ char	**get_all_path(t_env *env) //getenv path and splits it
 		return (all_paths);
 }
 
-//finds right path for cmd, returns cmd if absolute path is found in env
-char *get_right_path(t_env *env, char *cmd)
+char	*get_right_path(t_env *env, char *cmd)
 {
-	int     i;
-	char    *temp;
+	int		i;
+	char	*temp;
 	char	**all_paths;
-	char    *path;
+	char	*path;
 
 	i = -1;
 	all_paths = get_all_path(env);

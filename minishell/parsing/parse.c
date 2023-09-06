@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 12:27:11 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:50:57 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	check_quotes(char *input)
 
 void	parser(char	*input, t_env *envi)
 {
-	t_token *head;
+	t_token	*head;
 	int		i;
 
 	i = 0;
@@ -58,7 +58,6 @@ void	parser(char	*input, t_env *envi)
 	{
 		replace_dollar(head);
 		execution(head, envi);
-		//print_list(head);
 	}
 	free_token(&head);
 }
@@ -75,7 +74,6 @@ void	initialize_sequence(t_token *new, t_env *envi, int index)
 	new->fdread = 1;
 	new->fdwrite = 1;
 	(void)envi;
-	//new->env = envi;
 	new->i = index;
 	new->arg_all = NULL;
 	new->end_of_file = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:50:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:01:39 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:51:48 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	get_cmd(t_token *new, char *input)
 		get_dquote_cmd(new, input);
 	else
 	{
-		while (input[new->i] && !ft_isaspace(input[new->i]) && input[new->i] != '|')
+		while (input[new->i] && !ft_isaspace(input[new->i])
+			&& input[new->i] != '|')
 		{
 			new->cmd[++j] = input[new->i];
 			new->i++;
@@ -93,7 +94,8 @@ void	get_arg(t_token *new, char *input)
 	{
 		space_index(new, input);
 		if (input[new->i] == '\'')
-		{	new->issquote = 1;
+		{	
+			new->issquote = 1;
 			get_squote(new, input);
 		}
 		else if (input[new->i] == '"')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:42:53 by cgross            #+#    #+#             */
-/*   Updated: 2023/08/31 13:01:31 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:53:55 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	r_left(t_token	*new, char *input)
 	{
 		perror("issue open r_left");
 		new->error = 1;
-		globalv = 1;
+		g_globalv = 1;
 		return ;
 	}
 	new->file_type = R_LEFT;
@@ -38,7 +38,7 @@ void	rr_left(t_token	*new, char *input)
 	{
 		perror("issue open rr_left");
 		new->error = 1;
-		globalv = 1;
+		g_globalv = 1;
 		return ;
 	}
 	new->file_type = R_LEFT;
@@ -55,7 +55,7 @@ void	r_right(t_token	*new, char *input)
 	{
 		perror("issue open r_right");
 		new->error = 1;
-		globalv = 1;
+		g_globalv = 1;
 		return ;
 	}
 	new->file_type = R_RIGHT;
@@ -73,7 +73,7 @@ void	rr_right(t_token *new, char *input)
 	{
 		perror("issue open rr_right");
 		new->error = 1;
-		globalv = 1;
+		g_globalv = 1;
 		return ;
 	}
 	new->file_type = RR_RIGHT;

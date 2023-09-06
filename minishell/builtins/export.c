@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:38:44 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 12:55:19 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:40:55 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	ft_export(t_env *env, char *name, char *value)
 {
-	t_env *curr = env;
+	t_env	*curr;
+	t_env	*new_var;
 
+	curr = env;
 	while (curr)
 	{
 		if (ft_strcmp(curr->name, name) == 0)
@@ -24,11 +26,11 @@ void	ft_export(t_env *env, char *name, char *value)
 			curr->value = ft_strdup(value);
 			return ;
 		}
-		if (!curr->next) 
-			break;
+		if (!curr->next)
+			break ;
 		curr = curr->next;
 	}
-	t_env *new_var = malloc(sizeof(t_env));
+	new_var = malloc(sizeof(t_env));
 	new_var->name = ft_strdup(name);
 	new_var->value = ft_strdup(value);
 	new_var->next = NULL;
@@ -36,9 +38,9 @@ void	ft_export(t_env *env, char *name, char *value)
 	curr->next->previous = curr;
 }
 
-int		ft_export_parse(t_token *s, t_env *env)
+int	ft_export_parse(t_token *s, t_env *env)
 {
-	char *str;
+	char	*str;
 
 	str = ft_dechar(s->arg);
 	s->exportname = ft_splitname(str);

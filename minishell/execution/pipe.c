@@ -6,21 +6,11 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:15:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:05:42 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:48:03 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	error(char *str)
-{
-	ft_putstr_fd("error: ", 2);
-	if (errno)
-		perror(str);
-	else
-		ft_putstr_fd(str, 2);
-	exit(EXIT_FAILURE);
-}
 
 void	noexec(char *name)
 {
@@ -74,4 +64,4 @@ int	pipex(t_token *s, t_env *env, char *cmd1, char *cmd2)
 	if (WIFEXITED(s->exit))
 		return (WEXITSTATUS(s->exit));
 	return (0);
-} 
+}

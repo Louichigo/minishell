@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 12:26:02 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:43:10 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,28 @@
 
 void	ft_unset(t_env **env, char *name)
 {
-	t_env *curr = *env;
+	t_env	*curr;
+	t_env	*temp;
 
+	curr = *env;
+	temp = *env;
 	while (curr)
 	{
 		if (ft_strcmp(curr->name, name) == 0)
 		{
 			if (!curr->previous)
 			{
-				t_env *temp = *env;
 				if (temp->next == NULL)
 				{
 					*env = NULL;
-					return;
+					return ;
 				}
 				(*env) = (*env)->next;
 				(*env)->previous = NULL;
 				free(temp->name);
 				free(temp->value);
 				free(temp);
-				return;
+				return ;
 			}
 			else if (!curr->next)
 				curr->previous->next = NULL;
@@ -57,20 +59,21 @@ void	ft_unset(t_env **env, char *name)
 			free(curr->name);
 			curr = NULL;
 			free(curr);
-			return;
+			free(temp);
+			return ;
 		}
 		if (!curr->next)
-			break;
+			break ;
 		curr = curr->next;
 	}
 }
 
-int		ft_unset_parse(t_token *s, t_env *env)
+int	ft_unset_parse(t_token *s, t_env *env)
 {
-	char *str;
+	char	*str;
 
 	str = ft_dechar(s->arg);
 	ft_unset(&env, str);
-	free(str);	
+	free(str);
 	return (0);
 }

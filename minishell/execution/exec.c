@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 14:48:28 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:45:04 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	execution(t_token *s, t_env *env)
 
 void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp)
 {
-	int	pid = 0;
-	int status = 0;
+	int	pid;
+	int	status;
 
+	status = 0;
+	pid = 0;
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
@@ -43,13 +45,13 @@ void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp)
 	{
 		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
 			ft_error(s, *cmd);
-		exit(globalv);
+		exit(g_globalv);
 	}
 	else
 	{
 		wait(&status);
 		if (WIFEXITED(status))
-			globalv = WEXITSTATUS(status);
+			g_globalv = WEXITSTATUS(status);
 	}
 }
 
@@ -61,7 +63,7 @@ void	parse_exec(t_token *s)
 
 	i = 1;
 	j = 0;
-	s->sizearg = ft_arglen(s); 
+	s->sizearg = ft_arglen(s);
 	s->arg_all = malloc(sizeof(char *) * (2 + s->sizearg));
 	s->arg_all[0] = ft_strdup(s->cmd);
 	while (s->arg[j])

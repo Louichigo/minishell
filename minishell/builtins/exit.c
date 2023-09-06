@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:26:30 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 11:41:07 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:39:11 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_exit(t_env *env, int i)
 {
-		clear_history();
-		ft_freeenv(env);
-		printf("exit\n");
-		exit(i);
+	clear_history();
+	ft_freeenv(env);
+	printf("exit\n");
+	exit(i);
 }
 
 int	ft_exit_parse(t_token *s, t_env *env)
@@ -37,7 +37,7 @@ int	ft_exit_parse(t_token *s, t_env *env)
 		if (str[i] < 48 || str[i] > 57)
 		{
 			ft_putstr_fd("exit: numeric argument required\n", 2);
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -49,4 +49,3 @@ int	ft_exit_parse(t_token *s, t_env *env)
 	ft_exit(env, i);
 	return (i);
 }
-

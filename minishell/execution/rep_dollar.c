@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rep_dollar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:11:26 by cgross            #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:57 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:53:28 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	replace_dollar(t_token *tok)
 			if (tok->arg[i][1] == '?')
 			{
 				free(tok->arg[i]);
-				tok->arg[i] = ft_itoa(globalv);
+				tok->arg[i] = ft_itoa(g_globalv);
 			}
 		}
 		i++;

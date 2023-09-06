@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 12:34:35 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:09:37 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:46:55 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	ft_nbrdecommandes(t_token *s)
 {
-
 	s->nbc = 0;
 	while (s)
 	{
 		s->nbc++;
 		if (!s->next)
-			break;
+			break ;
 		s = s->next;
 	}
 	return (s->nbc);
@@ -41,10 +40,10 @@ void	pipe_parse(t_token *s, t_env *env)
 		ft_free(s->arg_all);
 		i++;
 		if (!s->next)
-			break;
+			break ;
 		s = s->next;
 	}
 	pipecmd[i] = NULL;
-	globalv = pipex(s, env, pipecmd[0], pipecmd[1]);
+	g_globalv = pipex(s, env, pipecmd[0], pipecmd[1]);
 	ft_free(pipecmd);
 }

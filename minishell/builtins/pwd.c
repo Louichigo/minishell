@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:37:36 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:35 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:41:12 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_pwd(void)
 {
-	char *cwd;
+	char	*cwd;
 
 	cwd = malloc(PATH_MAX);
 	if (getcwd(cwd, PATH_MAX) != NULL)

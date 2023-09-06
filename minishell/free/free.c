@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:54:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 14:46:46 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:28:09 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free(char **str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		free(str[i]);
 		i++;
@@ -56,13 +56,6 @@ void	free_double(t_token *token)
 		free(token->arg);
 	}
 	i = -1;
-	/*if (token->arg_all)
-	{
-		while (token->arg_all[++i])
-			free(token->arg_all[i]);
-		free(token->arg_all);
-	}*/
-	i = -1;
 	if (token->g_env)
 	{
 		while (token->g_env[++i])
@@ -73,7 +66,9 @@ void	free_double(t_token *token)
 
 void	ft_freeenv(t_env *env)
 {
-	t_env *curr = env;
+	t_env	*curr;
+
+	curr = env;
 	while (curr)
 	{
 		free(curr->name);
@@ -81,6 +76,5 @@ void	ft_freeenv(t_env *env)
 		curr = curr->next;
 	}
 	free(curr);
-	free(env);	
+	free(env);
 }
-

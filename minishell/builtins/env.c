@@ -6,17 +6,19 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 12:13:43 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:38:26 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//fonction qui creer les maillons de l'environnement
 void	createnode(t_env **env, char *name, char *value)
 {
-	t_env *newvar = malloc(sizeof(t_env));
+	t_env	*newvar;
+	t_env	*curr;
 
+	curr = *env;
+	newvar = malloc(sizeof(t_env));
 	newvar->name = ft_strdup(name);
 	newvar->value = ft_strdup(value);
 	newvar->previous = NULL;
@@ -26,7 +28,6 @@ void	createnode(t_env **env, char *name, char *value)
 		*env = newvar;
 		return ;
 	}
-	t_env *curr = *env;
 	while (curr->next != NULL)
 	{
 		curr = curr->next;
@@ -35,7 +36,6 @@ void	createnode(t_env **env, char *name, char *value)
 	curr->next->previous = curr;
 }
 
-//initialisation de l'environnement 
 t_env	*init_env(char **envp)
 {
 	t_env	*env;
@@ -54,16 +54,14 @@ t_env	*init_env(char **envp)
 		free(value);
 		i++;
 	}
-	//ft_unset(&env, "TERM_SESSION_ID");
-	//ft_unset(&env, "SSH_AUTH_SOCK");
 	return (env);
 }
 
-//afficher l'environnement
-int		ft_env(t_env *env, t_token *s)
+int	ft_env(t_env *env, t_token *s)
 {
-	t_env *curr = env;
+	t_env	*curr;
 
+	curr = env;
 	if (s->arg[0])
 		return (1);
 	while (curr != NULL)
@@ -76,8 +74,9 @@ int		ft_env(t_env *env, t_token *s)
 
 char	*if_dollar(t_token *s, t_env *env, char *str)
 {
-	t_env *curr = env;
+	t_env	*curr;
 
+	curr = env;
 	s->dollartemp = 0;
 	while (curr)
 	{
@@ -89,8 +88,8 @@ char	*if_dollar(t_token *s, t_env *env, char *str)
 			s->dollartemp = 1;
 			return (str);
 		}
-		if (!curr->next) 
-			break;
+		if (!curr->next)
+			break ;
 		curr = curr->next;
 	}
 	return (str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/08/31 13:00:15 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:35:40 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ void	ft_echo(char *str, int echon)
 		write(1, "\n", 1);
 }
 
-int		ft_echo_parse(t_token *s, t_env *env)
+int	ft_echo_parse(t_token *s, t_env *env)
 {
 	char	*str;
-	char	*dollar = NULL;
+	char	*dollar;
 	char	*finalstr;
 	int		i;
 
 	i = 0;
+	dollar = NULL;
 	if (s->arg[0] == NULL)
 	{
 		printf("\n");
@@ -51,7 +52,7 @@ int		ft_echo_parse(t_token *s, t_env *env)
 	return (0);
 }
 
-char *ft_jenpeuxplus(t_token *s, char *str, char *dollar)
+char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar)
 {
 	char	*newstr;
 	int		len;
@@ -104,12 +105,12 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str)
 	return (newstr);
 }
 
-char *ft_echon(char **str, int i)
+char	*ft_echon(char **str, int i)
 {
-	char *newstr;
-	int	len;
-	int	k;
-	int	j;
+	char	*newstr;
+	int		len;
+	int		k;
+	int		j;
 
 	k = 0;
 	len = ft_fulllen(str, i);

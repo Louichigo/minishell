@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:46:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 18:21:03 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:34:41 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 char	*find_var(t_env *env, char *name)
 {
-	t_env	*curr = env;
+	t_env	*curr;
 
+	curr = env;
 	while (curr)
 	{
 		if (strcmp(curr->name, name) == 0)
 		{
 			return (curr->value);
 		}
-		if (!curr->next) 
+		if (!curr->next)
 		{
 			return (NULL);
 		}
@@ -31,9 +32,9 @@ char	*find_var(t_env *env, char *name)
 	return (NULL);
 }
 
-int		ft_cd(t_env *env, char *str)
+int	ft_cd(t_env *env, char *str)
 {
-	char *cwd;
+	char	*cwd;
 
 	cwd = malloc(PATH_MAX);
 	getcwd(cwd, PATH_MAX);
@@ -53,7 +54,7 @@ int		ft_cd(t_env *env, char *str)
 			return (1);
 		}
 	}
-    else if (chdir(str) != 0)
+	else if (chdir(str) != 0)
 	{
 		perror("minishell: cd");
 		return (1);
@@ -67,7 +68,7 @@ int		ft_cd(t_env *env, char *str)
 	return (0);
 }
 
-int		ft_cd_parse(t_token *s, t_env *env)
+int	ft_cd_parse(t_token *s, t_env *env)
 {
 	char	*str;
 	int		ret;
