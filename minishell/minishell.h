@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 18:25:46 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:08:07 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ typedef struct s_token
 {
 	const char			*path[2];
 	char *const			*cmdd[2];
-	int					file[2];
-	int					pipe[2];
 	int					pid[2];
+	int					file[2];
 	int					exit;
 	int					issquote;
 	int					type;
@@ -58,6 +57,7 @@ typedef struct s_token
 	int					flag_env[100];
 	int					syntax;
 	int					i;
+	int					nbc;
 	int					pos;
 	int					env_len;
 	int					file_type;
@@ -108,9 +108,10 @@ int		ft_echo_parse(t_token *s, t_env *env);
 void	execution(t_token *s, t_env *env);
 void	parse_exec(t_token *s);
 void	ft_error(t_token *s, char *cmd);
-int		pipex(t_token *s, t_env *env, char *cmd1, char *cmd2);
+int	pipex(t_token *s, t_env *env, char *cmd1, char *cmd2);
 char	*ft_clabonne(char **str);
 char	*ft_strchr(const char *s, int c);
+void	pipe_parse(t_token *s, t_env *env);
 
 t_env	*init_env(char **envp);
 
@@ -131,7 +132,6 @@ char	*ft_putdollar(t_token *s, t_env *env, char *str, int len);
 char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar);
 char	*find_var(t_env *env, char *name);
 int		fullspace(char *input);
-void	ft_freeall(char **str);
 
 int	is_builtin(t_token *s);
 int	ft_fulllen(char **str, int i);

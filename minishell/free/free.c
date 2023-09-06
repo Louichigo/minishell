@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:54:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/04 16:37:51 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:46:46 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,5 @@ void	ft_freeenv(t_env *env)
 	}
 	free(curr);
 	free(env);	
-}
-
-void	ft_freeall(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
 }
 

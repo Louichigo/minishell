@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/05 18:26:03 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:48:28 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,11 @@ void	execution(t_token *s, t_env *env)
 		{
 			parse_exec(s);
 			exec_cmd(s, env, s->arg_all, NULL);
-			ft_freeall(s->arg_all);
+			ft_free(s->arg_all);
 		}
 	}
 	else if (s->next)
-	{
-		char *cmd1;
-		char *cmd2;
-		parse_exec(s);
-		cmd1 = ft_clabonne(s->arg_all);
-		ft_freeall(s->arg_all);
-		s = s->next;
-		parse_exec(s);
-		cmd2 = ft_clabonne(s->arg_all);
-		ft_freeall(s->arg_all);
-		globalv = pipex(s, env, cmd1, cmd2);
-	}
+		pipe_parse(s, env);
 	else
 		printf("PAS NORMAL \n");
 }
