@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:52:54 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:25:30 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ typedef struct s_env
 
 typedef struct s_token
 {
-	const char			*path[2];
-	char *const			*cmdd[2];
-	int					pid[2];
-	int					file[2];
 	int					exit;
 	int					issquote;
 	int					type;
@@ -68,9 +64,7 @@ typedef struct s_token
 	char				*end_of_file;
 	char				*cmd;
 	char				**arg;
-	char				**g_env;
 	char				**arg_all;
-	char				**secondcmd;
 	struct s_token		*next;
 }				t_token;
 
@@ -86,7 +80,7 @@ enum e_token {
 
 void	ft_echo(char *str, int echon);
 void	ft_exit(t_env *env, int i);
-void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp);
+void	exec_cmd(t_token *s, t_env *env, char **envp);
 void	ft_free(char **str);
 void	free_token(t_token **token);
 void	free_double(t_token *token);
@@ -123,6 +117,9 @@ void	rr_right(t_token *new, char *input);
 void	parser(char	*input, t_env *envi);
 void	initialize_sequence(t_token *new, t_env *envi, int index);
 void	error(char *str);
+void	exec_cmds(t_token *token, t_env *env);
+void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
+void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 
 int		ft_pwd(void);
 int		ft_env(t_env *env, t_token *s);
@@ -149,6 +146,7 @@ int		mystrcspn(char *s, char *reject, int i);
 int		env_handler(t_token *new, char *input, int j);
 int		iscontained(char *here, char *eof);
 int		isword(char *here, char *eof, int index);
+int		exit_error(char *str);
 
 t_env	*init_env(char **envp);
 

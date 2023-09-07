@@ -6,12 +6,13 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 12:34:35 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:46:55 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:19:28 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
 int	ft_nbrdecommandes(t_token *s)
 {
 	s->nbc = 0;
@@ -47,3 +48,4 @@ void	pipe_parse(t_token *s, t_env *env)
 	g_globalv = pipex(s, env, pipecmd[0], pipecmd[1]);
 	ft_free(pipecmd);
 }
+*/

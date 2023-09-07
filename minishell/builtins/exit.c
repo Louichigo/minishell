@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:26:30 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:39:11 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:26:01 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,25 @@ int	ft_exit_parse(t_token *s, t_env *env)
 		return (0);
 	}
 	str = ft_dechar(s->arg);
-	while (str[i])
-	{
-		if (str[i] < 48 || str[i] > 57)
-		{
-			ft_putstr_fd("exit: numeric argument required\n", 2);
-			break ;
-		}
-		i++;
-	}
-	if (str == 0)
-		i = 0;
-	else
-		i = 1;
+	i = exit_error(str);
 	free(str);
 	ft_exit(env, i);
 	return (i);
+}
+
+int	exit_error(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+		{
+			ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }

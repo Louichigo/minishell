@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:50:57 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:03:20 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ void	initialize_sequence(t_token *new, t_env *envi, int index)
 	new->i = index;
 	new->arg_all = NULL;
 	new->end_of_file = NULL;
-	new->g_env = NULL;
 }

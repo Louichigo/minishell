@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:45:04 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:42:54 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,36 @@ void	execution(t_token *s, t_env *env)
 			exec_builtin(s, env);
 		else
 		{
-			parse_exec(s);
-			exec_cmd(s, env, s->arg_all, NULL);
+			exec_cmd(s, env, NULL);
 			ft_free(s->arg_all);
 		}
 	}
-	else if (s->next)
-		pipe_parse(s, env);
 	else
-		printf("PAS NORMAL \n");
+		exec_cmds(s, env);
 }
 
-void	exec_cmd(t_token *s, t_env *env, char **cmd, char **envp)
+void	exec_cmd(t_token *s, t_env *env, char **envp)
 {
 	int	pid;
-	int	status;
+	int	exit_status;
 
-	status = 0;
+	exit_status = 0;
 	pid = 0;
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
+	parse_exec(s);
 	if (pid == 0)
 	{
-		if (execve(get_right_path(env, *cmd), cmd, envp) == -1)
-			ft_error(s, *cmd);
+		if (execve(get_right_path(env, *s->arg_all), s->arg_all, envp) == -1)
+			ft_error(s, *s->arg_all);
 		exit(g_globalv);
 	}
 	else
 	{
-		wait(&status);
-		if (WIFEXITED(status))
-			g_globalv = WEXITSTATUS(status);
+		wait(&exit_status);
+		if (WIFEXITED(exit_status))
+			g_globalv = WEXITSTATUS(exit_status);
 	}
 }
 

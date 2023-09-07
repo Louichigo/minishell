@@ -6,62 +6,62 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:15:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:48:03 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:11:44 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	noexec(char *name)
+void	exec_cmds(t_token *token, t_env *env)
 {
-	ft_putstr_fd("pipex: ", STDERR_FILENO);
-	ft_putstr_fd(name, STDERR_FILENO);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	exit(127);
+	int		fd_pipe_tmp;
+	int		fd_pipe[2];
+	int		exit_status;
+	pid_t	fork_pid;
+
+	fd_pipe_tmp = 0;
+	while (token)
+	{
+		pipe(fd_pipe);
+		fork_pid = fork();
+		if (fork_pid == 0)
+		{
+			prep_fd(token, &fd_pipe_tmp, fd_pipe);
+			exec_cmd(token, env, NULL);
+			exit(g_globalv);
+		}
+		close_fd(token, &fd_pipe_tmp, fd_pipe);
+		token = token->next;
+	}
+	while (waitpid(-1, &exit_status, 0) > 0)
+		;
+	if (WIFEXITED(exit_status))
+		g_globalv = WEXITSTATUS(exit_status);
 }
 
-void	close_fd(t_token *pip)
+void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe)
 {
-	close(pip->file[0]);
-	close(pip->file[1]);
+	close(fd_pipe[0]);
+	if (token->fdread == 1)
+		token->fdread = *fd_pipe_tmp;
+	dup2(token->fdread, STDIN_FILENO);
+	if (token->fdwrite >= 3)
+		close(fd_pipe[1]);
+	else if (!token->next)
+		token->fdwrite = 1;
+	else
+		token->fdwrite = fd_pipe[1];
+	dup2(token->fdwrite, STDOUT_FILENO);
 }
 
-void	exec_cmd1(t_token *p, t_env *env, char *cmd1)
+void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe)
 {
-	p->cmdd[0] = ft_split(cmd1, ' ');
-	p->path[0] = get_right_path(env, p->cmdd[0][0]);
-	if (!p->path[0])
-		noexec(cmd1);
-	dup2(p->file[1], STDOUT_FILENO);
-	close_fd(p);
-	execve(p->path[0], p->cmdd[0], NULL);
-}
-
-void	exec_cmd2(t_token *p, t_env *env, char *cmd2)
-{
-	p->cmdd[1] = ft_split(cmd2, ' ');
-	p->path[1] = get_right_path(env, p->cmdd[1][0]);
-	if (!p->path[1])
-		noexec(cmd2);
-	dup2(p->file[0], STDIN_FILENO);
-	close_fd(p);
-	execve(p->path[1], p->cmdd[1], NULL);
-}
-
-int	pipex(t_token *s, t_env *env, char *cmd1, char *cmd2)
-{
-	if (pipe(s->file) == -1)
-		error("error with pipe();\n");
-	s->pid[0] = fork();
-	if (s->pid[0] == 0)
-		exec_cmd1(s, env, cmd1);
-	s->pid[1] = fork();
-	if (s->pid[1] == 0)
-		exec_cmd2(s, env, cmd2);
-	close_fd(s);
-	waitpid(s->pid[0], NULL, 0);
-	waitpid(s->pid[1], NULL, 0);
-	if (WIFEXITED(s->exit))
-		return (WEXITSTATUS(s->exit));
-	return (0);
+	close(fd_pipe[1]);
+	if (*fd_pipe_tmp >= 3)
+		close(*fd_pipe_tmp);
+	if (token->fdwrite >= 3)
+		close(token->fdwrite);
+	if (token->fdread >= 3)
+		close(token->fdread);
+	*fd_pipe_tmp = fd_pipe[0];
 }
