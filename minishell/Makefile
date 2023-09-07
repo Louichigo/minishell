@@ -6,7 +6,7 @@
 #    By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/11 16:59:33 by lobertho          #+#    #+#              #
-#    Updated: 2023/09/07 15:52:09 by cgross           ###   ########.fr        #
+#    Updated: 2023/09/07 16:17:08 by cgross           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = minishell
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -lreadline #-fsanitize=address $(RD_REPLACE)
+FLAGS = -Wall -Wextra -Werror -lreadline -fsanitize=address $(RD_REPLACE)
 all: $(NAME)
 
 $(NAME): $(OBJS)
