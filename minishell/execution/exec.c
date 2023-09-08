@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/07 14:42:54 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/08 13:38:16 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@ void	execution(t_token *s, t_env *env)
 {
 	if (!s->next)
 	{
-		if (is_builtin(s) == 1)
-			exec_builtin(s, env);
-		else
-		{
-			exec_cmd(s, env, NULL);
+		exec_cmd(s, env, NULL);
+		if (is_builtin(s) != 1)
 			ft_free(s->arg_all);
-		}
 	}
 	else
 		exec_cmds(s, env);
@@ -33,11 +29,13 @@ void	exec_cmd(t_token *s, t_env *env, char **envp)
 	int	pid;
 	int	exit_status;
 
+	if (is_builtin(s) == 1)
+		exec_builtin(s, env);
 	exit_status = 0;
 	pid = 0;
 	pid = fork();
 	if (pid == -1)
-		perror("fork");
+		perror("minishell: fork error");
 	parse_exec(s);
 	if (pid == 0)
 	{
