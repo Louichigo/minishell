@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:15:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/07 16:11:44 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/08 13:54:02 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	exec_cmds(t_token *token, t_env *env)
 	pid_t	fork_pid;
 
 	fd_pipe_tmp = 0;
+	g_globalv = 42;
 	while (token)
 	{
 		pipe(fd_pipe);

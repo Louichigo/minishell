@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/07 15:25:30 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/08 14:00:45 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_env
 
 typedef struct s_token
 {
+	int					pid;
+	int					exit_status;
 	int					exit;
 	int					issquote;
 	int					type;

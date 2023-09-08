@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:05:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/07 15:41:57 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/08 13:57:49 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	handler(int num)
 {
-	if (num == SIGINT)
+	if (num == SIGINT && g_globalv == 42)
+	{
+		ft_putstr_fd("^C \n", 2);
+		g_globalv = 130;
+	}
+	else if (num == SIGINT)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
@@ -22,10 +27,21 @@ void	handler(int num)
 		rl_redisplay();
 		g_globalv = 1;
 	}
+	if (num == SIGQUIT && g_globalv == 42)
+	{
+		ft_putstr_fd("^\\Quit: 3\n", 2);
+		g_globalv = 131;
+	}
+	else if (num == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+		g_globalv = 0;
+	}
 }
 
 void	signalsinit(void)
 {
 	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, handler);
 }

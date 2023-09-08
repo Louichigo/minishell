@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 13:38:16 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/08 14:01:36 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ void	execution(t_token *s, t_env *env)
 
 void	exec_cmd(t_token *s, t_env *env, char **envp)
 {
-	int	pid;
-	int	exit_status;
-
 	if (is_builtin(s) == 1)
+	{
 		exec_builtin(s, env);
-	exit_status = 0;
-	pid = 0;
-	pid = fork();
-	if (pid == -1)
+		return ;
+	}
+	s->exit_status = 0;
+	s->pid = 0;
+	g_globalv = 42;
+	s->pid = fork();
+	if (s->pid == -1)
 		perror("minishell: fork error");
 	parse_exec(s);
-	if (pid == 0)
+	if (s->pid == 0)
 	{
 		if (execve(get_right_path(env, *s->arg_all), s->arg_all, envp) == -1)
 			ft_error(s, *s->arg_all);
@@ -45,9 +46,9 @@ void	exec_cmd(t_token *s, t_env *env, char **envp)
 	}
 	else
 	{
-		wait(&exit_status);
-		if (WIFEXITED(exit_status))
-			g_globalv = WEXITSTATUS(exit_status);
+		wait(&s->exit_status);
+		if (WIFEXITED(s->exit_status))
+			g_globalv = WEXITSTATUS(s->exit_status);
 	}
 }
 
