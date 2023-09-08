@@ -6,12 +6,15 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:43:10 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:07:14 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*t_env *temp = *env;
+/*
+	t_env *temp;
+
+	temp = *env;
 	if (temp->next == NULL)
 	{
 		*env = NULL;
@@ -21,27 +24,29 @@
 	(*env)->previous = NULL;
 	free(temp->name);
 	free(temp->value);
-	free(temp);*/
-
+	free(temp);
+}
+*/
 void	ft_unset(t_env **env, char *name)
 {
 	t_env	*curr;
-	t_env	*temp;
 
 	curr = *env;
-	temp = *env;
 	while (curr)
 	{
 		if (ft_strcmp(curr->name, name) == 0)
 		{
 			if (!curr->previous)
 			{
+				t_env *temp;
+
+				temp = *env;
 				if (temp->next == NULL)
 				{
 					*env = NULL;
-					return ;
+					return;
 				}
-				(*env) = (*env)->next;
+				*env = (*env)->next;
 				(*env)->previous = NULL;
 				free(temp->name);
 				free(temp->value);
@@ -59,7 +64,6 @@ void	ft_unset(t_env **env, char *name)
 			free(curr->name);
 			curr = NULL;
 			free(curr);
-			free(temp);
 			return ;
 		}
 		if (!curr->next)

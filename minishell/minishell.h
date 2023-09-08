@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 14:00:45 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:58:32 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 
 int		ft_pwd(void);
-int		ft_env(t_env *env, t_token *s);
+int		ft_env(t_env **env, t_token *s);
 int		ft_exit_parse(t_token *s, t_env *env);
 int		ft_cd(t_env *env, char *str);
 int		exec_builtin(t_token *s, t_env *env);
@@ -145,7 +145,6 @@ int		isdeli(char c, char flag);
 int		ft_isaspace(char c);
 int		checkquotes(char *input, char quote, int i);
 int		mystrcspn(char *s, char *reject, int i);
-int		env_handler(t_token *new, char *input, int j);
 int		iscontained(char *here, char *eof);
 int		isword(char *here, char *eof, int index);
 int		exit_error(char *str);

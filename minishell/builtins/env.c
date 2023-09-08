@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 12:00:18 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:14:27 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ t_env	*init_env(char **envp)
 	return (env);
 }
 
-int	ft_env(t_env *env, t_token *s)
+int	ft_env(t_env **env, t_token *s)
 {
 	t_env	*curr;
 
-	curr = env;
+	curr = *env;
 	if (s->arg[0])
 		return (1);
 	while (curr != NULL)
