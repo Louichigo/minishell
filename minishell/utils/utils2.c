@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/07 15:05:56 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/08 12:33:54 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,17 @@ int	ft_fulllen(char **str, int i)
 {
 	int	j;
 	int	count;
-	int	toremove;
 
 	j = 0;
-	toremove = 0;
 	count = 0;
 	while (str[i])
 	{
 		while (str[i][j])
-		{
-			if (str[i][j] == '\\' && str[i][j + 1] > 32 && str[i][j - 1] != 92)
-				toremove++;
 			j++;
-		}
 		j++;
 		i++;
 		count = j;
 		j = 0;
 	}
-	return (count - toremove);
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:35:40 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:49:07 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str)
 	start = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == 36 && str[i - 1] != '\\')
+		if (str[i] == 36)
 		{
 			i++;
 			start = i;
@@ -114,17 +114,15 @@ char	*ft_echon(char **str, int i)
 
 	k = 0;
 	len = ft_fulllen(str, i);
+	//printf("%d\n", len);
 	newstr = malloc(sizeof(char) * len);
+	if (!newstr)
+		return (NULL);
 	while (str[i])
 	{
 		j = 0;
 		while (str[i][j])
-		{
-			if (str[i][j] == '\\' && str[i][j + 1] > 32 && str[i][j - 1] != 92)
-				j++;
-			else
-				newstr[k++] = str[i][j++];
-		}
+			newstr[k++] = str[i][j++];
 		i++;
 		if (str[i])
 			newstr[k++] = 32;

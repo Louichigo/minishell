@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:11:26 by cgross            #+#    #+#             */
-/*   Updated: 2023/09/06 15:53:28 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:01:12 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	replace_dollar(t_token *tok)
 	{
 		if (tok->arg[i][0] == '$')
 		{
-			if (tok->arg[i][1] == '?')
+			if (tok->arg[i][1] == '?' && tok->issquote != 1)
 			{
 				free(tok->arg[i]);
 				tok->arg[i] = ft_itoa(g_globalv);
