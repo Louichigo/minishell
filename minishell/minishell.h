@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/11 13:31:44 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/11 14:37:08 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int		exec_builtin(t_token *s, t_env *env);
 int		ft_export_parse(t_token *s, t_env *env);
 int		ft_unset_parse(t_token *s, t_env *env);
 int		ft_cd_parse(t_token *s, t_env *env);
-int		ft_echo_parse(t_token *s, t_env *env);
+int	ft_echo_parse(t_token *s, t_env *env);
 int		pipex(t_token *s, t_env *env, char *cmd1, char *cmd2);
 int		fullspace(char *input);
 int		is_builtin(t_token *s);

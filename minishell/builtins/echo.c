@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 15:10:04 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:10:41 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_echo(char *str, int echon)
 	write(1, str, ft_strlen(str));
 	if (echon == 0)
 		write(1, "\n", 1);
+	free(str);
 }
 
 int	ft_echo_parse(t_token *s, t_env *env)
@@ -35,18 +36,20 @@ int	ft_echo_parse(t_token *s, t_env *env)
 	}
 	if (ft_strcmp(s->arg[0], "-n") == 0)
 		i = 1;
+	printf("s->arg: [%s]\n", s->arg[0]);
 	str = ft_echon(s->arg, i);
 	if (s->issquote != 1)
+	{
 		dollar = ft_finddollar(s, env, str);
+		printf("dollar: [%s]\n", dollar);
+	}
 	if (dollar == NULL || s->dollartemp == 0 || s->issquote == 1)
 	{
 		ft_echo(str, i);
-		free(str);
 		return (0);
 	}
 	finalstr = ft_jenpeuxplus(s, str, dollar);
 	ft_echo(finalstr, i);
-	free(finalstr);
 	free(str);
 	free(dollar);
 	return (0);
@@ -64,10 +67,11 @@ char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar)
 	len = ft_strlen(str) - (s->count + 1) + ft_strlen(dollar);
 	newstr = malloc(sizeof(char) * len + 1);
 	len = 0;
-	while (str[len] != 36)
+	while (str[len] != '$')
 		newstr[i++] = str[len++];
-	while (str[len] != '\0' && str[len] != 32)
+	while (str[len] != '\0' && str[len] != ' ')
 		len++;
+	printf("str[len]: [%s]\n", str);
 	while (dollar[j])
 	{
 		newstr[i++] = dollar[j++];
@@ -75,6 +79,7 @@ char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar)
 	while (str[len] != '\0')
 		newstr[i++] = str[len++];
 	newstr[i++] = '\0';
+	printf("newstr: [%s]\n", newstr);
 	return (newstr);
 }
 
@@ -90,7 +95,7 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str)
 	start = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == 36)
+		if (str[i] == '$')
 		{
 			i++;
 			start = i;
@@ -98,6 +103,7 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str)
 				i++;
 			s->count = i - start;
 			newstr = ft_putdollar(s, env, str, s->count);
+			printf("after putdollar: [%s]\n", newstr);
 			return (newstr);
 		}
 		i++;
@@ -108,13 +114,14 @@ char	*ft_finddollar(t_token *s, t_env *env, char *str)
 char	*ft_echon(char **str, int i)
 {
 	char	*newstr;
+	int		flagdollar;
 	int		len;
 	int		k;
 	int		j;
 
 	k = 0;
+	flagdollar = 0;
 	len = ft_fulllen(str, i);
-	//printf("%d\n", len);
 	newstr = malloc(sizeof(char) * len);
 	if (!newstr)
 		return (NULL);
@@ -122,9 +129,13 @@ char	*ft_echon(char **str, int i)
 	{
 		j = 0;
 		while (str[i][j])
+		{
 			newstr[k++] = str[i][j++];
+			if (str[i][j] == '$')
+				flagdollar = 1;
+		}
 		i++;
-		if (str[i])
+		if (str[i] && flagdollar != 1)
 			newstr[k++] = 32;
 	}
 	newstr[k] = '\0';
