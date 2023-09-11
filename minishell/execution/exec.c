@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 14:01:36 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:32:01 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,36 +77,4 @@ void	parse_exec(t_token *s)
 		j++;
 	}
 	s->arg_all[i] = NULL;
-}
-
-char	*ft_clabonne(char **str)
-{
-	char	*newstr;
-	int		i;
-	int		len;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		len = 0;
-		while (str[i][len] != '\0')
-			len++;
-		i++;
-		j += len;
-	}
-	newstr = malloc(sizeof(char) * j + 1 + i);
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		len = 0;
-		while (str[i][len])
-			newstr[j++] = str[i][len++];
-		newstr[j++] = 32;
-		i++;
-	}
-	newstr[j] = '\0';
-	return (newstr);
 }

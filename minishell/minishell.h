@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 14:58:32 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:31:44 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int		ft_pwd(void);
 int		ft_env(t_env **env, t_token *s);
 int		ft_exit_parse(t_token *s, t_env *env);
 int		ft_cd(t_env *env, char *str);
+int		cd_cond(t_env *env, char *str);
 int		exec_builtin(t_token *s, t_env *env);
 int		ft_export_parse(t_token *s, t_env *env);
 int		ft_unset_parse(t_token *s, t_env *env);
@@ -157,7 +158,6 @@ size_t	ft_strlen(const char *s);
 
 bool	check_quotes(char *input);
 
-char	*ft_clabonne(char **str);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_right_path(t_env *env, char *cmd);

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:46:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:34:41 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:16:26 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,24 @@ int	ft_cd(t_env *env, char *str)
 
 	cwd = malloc(PATH_MAX);
 	getcwd(cwd, PATH_MAX);
+	if (cd_cond(env, str) != 0)
+		return (1);
+	ft_export(env, "OLDPWD", cwd);
+	free(cwd);
+	cwd = malloc(PATH_MAX);
+	getcwd(cwd, PATH_MAX);
+	ft_export(env, "PWD", cwd);
+	free(cwd);
+	return (0);
+}
+
+int	cd_cond(t_env *env, char *str)
+{
 	if ((ft_strcmp(str, "~") == 0) || (ft_strcmp(str, "") == 0))
 	{
 		if (chdir(find_var(env, "HOME")) != 0)
 		{
-			perror("$HOME error");
+			perror("minishell: $HOME error");
 			return (1);
 		}
 	}
@@ -50,7 +63,7 @@ int	ft_cd(t_env *env, char *str)
 	{
 		if (chdir(find_var(env, "OLDPWD")) != 0)
 		{
-			perror("$OLDPWD error");
+			perror("minishell: $OLDPWD error");
 			return (1);
 		}
 	}
@@ -59,12 +72,6 @@ int	ft_cd(t_env *env, char *str)
 		perror("minishell: cd");
 		return (1);
 	}
-	ft_export(env, "OLDPWD", cwd);
-	free(cwd);
-	cwd = malloc(PATH_MAX);
-	getcwd(cwd, PATH_MAX);
-	ft_export(env, "PWD", cwd);
-	free(cwd);
 	return (0);
 }
 
