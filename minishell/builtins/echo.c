@@ -6,28 +6,45 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/11 15:24:05 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:52:38 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_echo(char *str, int echon)
+
+//prendre apres le dollar jusqua la fin de l'arg
+//chercher si env ou $? puis imprimer puis fin arg 
+//quand fin argument imprimer espace sauf si dernier argument
+
+void	ft_echo(int	arg, char *str, t_token *s, t_env *env)
 {
-	write(1, str, ft_strlen(str));
-	if (echon == 0)
-		write(1, "\n", 1);
+	int	i;
+
+	i = 0;
+	(void)env;
+	while (str[i])
+	{
+		if (str[i] == '$' && s->issquote != 1)
+		{
+			//analyse_arg(&str[i], s, env);
+			break ;
+		}
+		else
+			write(1, &str[i], 1);
+		i++;
+	}
+	if (arg == 0)
+		write(1, " ", 1);
 }
 
 int	ft_echo_parse(t_token *s, t_env *env)
 {
-	char	*str;
-	char	*dollar;
-	char	*finalstr;
 	int		i;
+	int		j;
+	int		len;
 
 	i = 0;
-	dollar = NULL;
 	if (s->arg[0] == NULL)
 	{
 		printf("\n");
@@ -35,97 +52,51 @@ int	ft_echo_parse(t_token *s, t_env *env)
 	}
 	if (ft_strcmp(s->arg[0], "-n") == 0)
 		i = 1;
-	str = ft_echon(s->arg, i);
-	if (s->issquote != 1)
-		dollar = ft_finddollar(s, env, str);
-	if (dollar == NULL || s->dollartemp == 0 || s->issquote == 1)
+	j = i;
+	len = ft_arglen(s);
+	while (s->arg[j])
 	{
-		ft_echo(str, i);
-		free(str);
-		return (0);
+		if (j == (len - 1) || s->issquote == 1 || s->isbquote == 1)
+			ft_echo(len, s->arg[j++], s, env);
+		else
+			ft_echo(0, s->arg[j++], s, env);
 	}
-	finalstr = ft_jenpeuxplus(s, str, dollar);
-	ft_echo(finalstr, i);
-	free(finalstr);
-	free(str);
-	free(dollar);
+	if (i == 0)
+		write(1, "\n", 1);
 	return (0);
 }
 
-char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar)
+//avancer jusqua dollar et apres si ? on print la gglobal et la suite de l arg
+//sinon on fait une string avec tt le reste de l'arg et on fait if_dollar
+//pour print la variable si c bon
+
+/*void	analyse_arg(char *str, t_token *s, t_env *env)
 {
-	char	*newstr;
-	int		len;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen(str) - (s->count + 1) + ft_strlen(dollar);
-	newstr = malloc(sizeof(char) * len + 1);
-	len = 0;
-	while (str[len] != 36)
-		newstr[i++] = str[len++];
-	while (str[len] != '\0' && str[len] != 32)
-		len++;
-	while (dollar[j])
+	s->di = 0;
+	s->newstr = NULL;
+	while (str[s->di] != '$')
+			s->di++;
+	while (str[s->di] != '\0')
 	{
-		newstr[i++] = dollar[j++];
-	}
-	while (str[len] != '\0')
-		newstr[i++] = str[len++];
-	newstr[i++] = '\0';
-	return (newstr);
-}
-
-char	*ft_finddollar(t_token *s, t_env *env, char *str)
-{
-	int		i;
-	int		start;
-	char	*newstr;
-
-	i = 0;
-	newstr = NULL;
-	s->count = 0;
-	start = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 36)
+		s->dj = 0;
+		while (str[s->di] != '$')
+			write(1, &str[s->di], 1);
+		s->di++;
+		if (str[s->di] == '?')
+			write(1, &g_globalv, 1);
+		else
 		{
-			i++;
-			start = i;
-			while (str[i] != '\0' && str[i] != 32)
-				i++;
-			s->count = i - start;
-			newstr = ft_putdollar(s, env, str, s->count);
-			return (newstr);
+			s->count = s->di;
+			while (str[s->di] != '\0' && str[s->di] != '$')
+				s->di++;
+			s->di = (s->di - s->count + 1);
+			newstr = malloc(sizeof(char) * s->di);
+			while (str[s->count] != '\0' && str[s->count] != '$')
+				s->newstr[s->dj++] = str[s->count++];
+			s->newstr[s->dj] = '\0';
+			//check_dollar();
+			free(s->newstr);
 		}
-		i++;
+		s->di++;
 	}
-	return (newstr);
-}
-
-char	*ft_echon(char **str, int i)
-{
-	char	*newstr;
-	int		len;
-	int		k;
-	int		j;
-
-	k = 0;
-	len = ft_fulllen(str, i);
-	newstr = malloc(sizeof(char) * len);
-	if (!newstr)
-		return (NULL);
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-			newstr[k++] = str[i][j++];
-		i++;
-		if (i < len - 1)
-			newstr[k++] = 32;
-	}
-	newstr[k] = '\0';
-	return (newstr);
-}
+}*/

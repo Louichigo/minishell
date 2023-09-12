@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 12:26:27 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:32:50 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	parser(char	*input, t_env *envi)
 	}
 	if (!head->error)
 	{
-		replace_dollar(head);
+		//replace_dollar(head);
 		execution(head, envi);
 	}
 	free_token(&head);

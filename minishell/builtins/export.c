@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:38:44 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 12:13:06 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 13:05:42 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	ft_export_parse(t_token *s, t_env *env)
 	char	*str;
 
 	str = ft_dechar(s->arg);
-	if (ft_strchr(str, '='))
-		return (0);
 	s->exportname = ft_splitname(str);
 	s->exportvalue = ft_splitvalue(str);
 	if (s->exportname == NULL || s->exportvalue == NULL)
@@ -52,9 +50,30 @@ int	ft_export_parse(t_token *s, t_env *env)
 		free(str);
 		return (1);
 	}
+	if (ft_ismaj(s->exportname) == 1)
+	{
+		free(str);
+		free(s->exportname);
+		free(s->exportvalue);
+		return (1);
+	}
 	free(str);
 	ft_export(env, s->exportname, s->exportvalue);
 	free(s->exportname);
 	free(s->exportvalue);
+	return (0);
+}
+
+int	ft_ismaj(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < 65 || str[i] > 90)
+			return (1);
+		i++;
+	}
 	return (0);
 }

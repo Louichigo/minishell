@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 11:32:39 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 13:05:31 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_token
 	int					pid;
 	int					exit_status;
 	int					exit;
+	int					isbquote;
 	int					issquote;
 	int					type;
 	int					sizearg;
@@ -55,12 +56,15 @@ typedef struct s_token
 	int					flag_env[100];
 	int					syntax;
 	int					i;
+	int					dj;
+	int					di;
 	int					nbc;
 	int					pos;
 	int					env_len;
 	int					file_type;
 	int					fdwrite;
 	int					fdread;
+	char				*newstr;
 	char				*exportname;
 	char				*exportvalue;
 	char				*end_of_file;
@@ -80,7 +84,7 @@ enum e_token {
 	RR_RIGHT = 7,
 };
 
-void	ft_echo(char *str, int echon);
+void	ft_echo(int	arg, char *str, t_token *s, t_env *env);
 void	ft_exit(t_env *env, int i);
 void	exec_cmd(t_token *s, t_env *env, char **envp);
 void	ft_free(char **str);
@@ -95,18 +99,13 @@ void	add_tab(t_token *token, int new);
 void	execution(t_token *s, t_env *env);
 void	parse_exec(t_token *s);
 void	ft_error(t_token *s, char *cmd);
-void	pipe_parse(t_token *s, t_env *env);
-void	replace_dollar(t_token *tok);
 void	init_termios(void);
 void	get_cmd(t_token *new, char *input);
 void	get_redirection(t_token *new, char *input);
 void	get_arg(t_token *new, char *input);
 void	space_index(t_token *new, char *input);
-void	initialisation(t_token	*head);
-void	add_token(t_token **head, char **command);
 void	add_last(t_token **head, t_token *new);
 void	print_list(t_token *head);
-void	print_env(t_env *env);
 void	get_word(t_token *new, char *input);
 void	get_squote(t_token *new, char *input);
 void	get_dquote(t_token *new, char *input);
@@ -123,6 +122,7 @@ void	error(char *str);
 void	exec_cmds(t_token *token, t_env *env);
 void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
+void	analyse_arg(char *str, t_token *s, t_env *env);
 
 int		ft_pwd(void);
 int		ft_env(t_env **env, t_token *s);
@@ -134,7 +134,6 @@ int		ft_export_parse(t_token *s, t_env *env);
 int		ft_unset_parse(t_token *s, t_env *env);
 int		ft_cd_parse(t_token *s, t_env *env);
 int		ft_echo_parse(t_token *s, t_env *env);
-int		pipex(t_token *s, t_env *env, char *cmd1, char *cmd2);
 int		fullspace(char *input);
 int		is_builtin(t_token *s);
 int		ft_fulllen(char **str, int i);
@@ -145,11 +144,11 @@ int		word_len(char *input, int i);
 int		isredi(char c);
 int		isdeli(char c, char flag);
 int		ft_isaspace(char c);
-int		checkquotes(char *input, char quote, int i);
 int		mystrcspn(char *s, char *reject, int i);
 int		iscontained(char *here, char *eof);
 int		isword(char *here, char *eof, int index);
 int		exit_error(char *str);
+int		ft_ismaj(char *str);
 
 t_env	*init_env(char **envp);
 
@@ -168,9 +167,6 @@ char	*ft_splitvalue(char *str);
 char	*ft_dechar(char **str);
 char	*ft_echon(char **str, int i);
 char	*if_dollar(t_token *s, t_env *env, char *str);
-char	*ft_finddollar(t_token *s, t_env *env, char *str);
-char	*ft_putdollar(t_token *s, t_env *env, char *str, int len);
-char	*ft_jenpeuxplus(t_token *s, char *str, char *dollar);
 char	*find_var(t_env *env, char *name);
 char	*ft_itoa(int n);
 char	*get_filename(t_token *new, char *input);

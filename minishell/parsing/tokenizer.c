@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:50:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:51:48 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:26:17 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ void	get_arg(t_token *new, char *input)
 			get_squote(new, input);
 		}
 		else if (input[new->i] == '"')
+		{
+			new->isbquote = 1;
 			get_dquote(new, input);
+		}
 		else if (isredi(input[new->i]))
 			get_redirection(new, input);
 		else

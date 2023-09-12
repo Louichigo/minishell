@@ -6,7 +6,7 @@
 /*   By: cgross <cgross@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:11:01 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 11:32:13 by cgross           ###   ########.fr       */
+/*   Updated: 2023/08/31 13:01:20 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,10 @@ void	print_list(t_token *head)
 	while (tmp)
 	{
 		j = -1;
-		printf("cmd: %s", tmp->cmd);
+		printf("cmd: %s ", tmp->cmd);
 		while (tmp->arg[++j])
 		{
 			printf("arg: %s", tmp->arg[j]);
-		}
-		printf("\n");
-		tmp = tmp->next;
-	}
-}
-
-void	print_env(t_env *env)
-{
-	t_env	*tmp;
-	int		i;
-
-	tmp = env;
-	while (tmp)
-	{
-		i = -1;
-		printf("name: %s", tmp->name);
-		while (tmp->name[++i])
-		{
-			printf("value: %s", tmp->value);
 		}
 		printf("\n");
 		tmp = tmp->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:02:24 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 12:33:54 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:57:06 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char	*ft_splitname(char *str)
 	char	*name;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i] != '\0')
 		i++;
+	if (str[i] == '\0')
+		return (NULL);
 	name = malloc(sizeof(char) * i + 1);
 	i = 0;
 	while (str[i] != '=')
@@ -39,8 +41,10 @@ char	*ft_splitvalue(char *str)
 
 	i = 0;
 	j = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i] != '\0')
 		i++;
+	if (str[i] == '\0')
+		return (NULL);
 	i++;
 	j = i;
 	while (str[i])

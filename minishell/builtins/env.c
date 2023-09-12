@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 15:14:27 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:34:02 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,4 @@ int	ft_env(t_env **env, t_token *s)
 		curr = curr->next;
 	}
 	return (0);
-}
-
-char	*if_dollar(t_token *s, t_env *env, char *str)
-{
-	t_env	*curr;
-
-	curr = env;
-	s->dollartemp = 0;
-	while (curr)
-	{
-		if (strcmp(curr->name, str) == 0)
-		{
-			free(str);
-			str = NULL;
-			str = ft_strdup(curr->value);
-			s->dollartemp = 1;
-			return (str);
-		}
-		if (!curr->next)
-			break ;
-		curr = curr->next;
-	}
-	return (str);
 }
