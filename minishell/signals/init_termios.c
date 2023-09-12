@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_termios.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgross <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:31:00 by cgross            #+#    #+#             */
-/*   Updated: 2023/08/31 14:37:18 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 15:03:12 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//init terminal settings and mute ctrl echoing
 void	init_termios(void)
 {
 	struct termios	termios;

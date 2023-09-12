@@ -6,18 +6,13 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 12:52:38 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:06:32 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-//prendre apres le dollar jusqua la fin de l'arg
-//chercher si env ou $? puis imprimer puis fin arg 
-//quand fin argument imprimer espace sauf si dernier argument
-
-void	ft_echo(int	arg, char *str, t_token *s, t_env *env)
+void	ft_echo(int arg, char *str, t_token *s, t_env *env)
 {
 	int	i;
 
@@ -27,7 +22,7 @@ void	ft_echo(int	arg, char *str, t_token *s, t_env *env)
 	{
 		if (str[i] == '$' && s->issquote != 1)
 		{
-			//analyse_arg(&str[i], s, env);
+			analyse_arg(&str[i], s, env);
 			break ;
 		}
 		else
@@ -66,37 +61,54 @@ int	ft_echo_parse(t_token *s, t_env *env)
 	return (0);
 }
 
-//avancer jusqua dollar et apres si ? on print la gglobal et la suite de l arg
-//sinon on fait une string avec tt le reste de l'arg et on fait if_dollar
-//pour print la variable si c bon
-
-/*void	analyse_arg(char *str, t_token *s, t_env *env)
+void	analyse_arg(char *str, t_token *s, t_env *env)
 {
 	s->di = 0;
 	s->newstr = NULL;
-	while (str[s->di] != '$')
-			s->di++;
 	while (str[s->di] != '\0')
 	{
-		s->dj = 0;
-		while (str[s->di] != '$')
-			write(1, &str[s->di], 1);
+		while (str[s->di] != '$' && str[s->di] != '\0')
+			write(1, &str[s->di++], 1);
+		if (str[s->di] == '\0')
+			return ;
 		s->di++;
+		s->dj = 0;
 		if (str[s->di] == '?')
-			write(1, &g_globalv, 1);
+		{
+			write(1, ft_itoa(g_globalv), ft_strlen(ft_itoa(g_globalv)));
+			s->di++;
+		}
 		else
 		{
-			s->count = s->di;
-			while (str[s->di] != '\0' && str[s->di] != '$')
+			s->c = s->di;
+			while (str[s->di] != '\0' && str[s->di] != '$' && str[s->di] != 32)
 				s->di++;
-			s->di = (s->di - s->count + 1);
-			newstr = malloc(sizeof(char) * s->di);
-			while (str[s->count] != '\0' && str[s->count] != '$')
-				s->newstr[s->dj++] = str[s->count++];
+			s->len = (s->di - s->c + 1);
+			s->newstr = malloc(sizeof(char) * s->len);
+			while (str[s->c] != '\0' && str[s->c] != '$' && str[s->c] != 32)
+				s->newstr[s->dj++] = str[s->c++];
 			s->newstr[s->dj] = '\0';
-			//check_dollar();
-			free(s->newstr);
+			check_dollar(s->newstr, env);
 		}
-		s->di++;
 	}
-}*/
+}
+
+void	check_dollar(char *str, t_env *env)
+{
+	t_env	*curr;
+
+	curr = env;
+	while (curr)
+	{
+		if (ft_strcmp(curr->name, str) == 0)
+		{
+			write(1, curr->value, ft_strlen(curr->value));
+			free(str);
+			return ;
+		}
+		curr = curr->next;
+	}
+	write(1, "$", 1);
+	write(1, str, ft_strlen(str));
+	free(str);
+}
