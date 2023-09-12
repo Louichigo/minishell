@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 15:04:57 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:22:56 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ enum e_token {
 
 void	ft_echo(int arg, char *str, t_token *s, t_env *env);
 void	ft_exit(t_env *env, int i);
-void	exec_cmd(t_token *s, t_env *env, char **envp);
+void	exec_cmd(t_token *s, t_env *env);
+void	exec_external(t_token *token, t_env *env);
 void	ft_free(char **str);
 void	free_token(t_token **token);
 void	free_double(t_token *token);

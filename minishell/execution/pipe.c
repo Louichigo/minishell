@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:15:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 13:54:02 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:24:27 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_cmds(t_token *token, t_env *env)
 		if (fork_pid == 0)
 		{
 			prep_fd(token, &fd_pipe_tmp, fd_pipe);
-			exec_cmd(token, env, NULL);
+			exec_cmd(token, env);
 			exit(g_globalv);
 		}
 		close_fd(token, &fd_pipe_tmp, fd_pipe);
