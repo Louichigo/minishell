@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/11 13:31:44 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 11:32:39 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	initialisation(t_token	*head);
 void	add_token(t_token **head, char **command);
 void	add_last(t_token **head, t_token *new);
 void	print_list(t_token *head);
+void	print_env(t_env *env);
 void	get_word(t_token *new, char *input);
 void	get_squote(t_token *new, char *input);
 void	get_dquote(t_token *new, char *input);

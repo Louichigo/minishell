@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:38:44 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/06 15:40:55 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:13:06 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_export_parse(t_token *s, t_env *env)
 	char	*str;
 
 	str = ft_dechar(s->arg);
+	if (ft_strchr(str, '='))
+		return (0);
 	s->exportname = ft_splitname(str);
 	s->exportvalue = ft_splitvalue(str);
 	if (s->exportname == NULL || s->exportvalue == NULL)
