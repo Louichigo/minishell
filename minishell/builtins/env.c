@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:04:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/11 17:34:02 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:28:17 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	ft_env(t_env **env, t_token *s)
 		return (1);
 	while (curr != NULL)
 	{
-		printf("%s=%s\n", curr->name, curr->value);
+		if (curr->value != NULL)
+			printf("%s=%s\n", curr->name, curr->value);
 		curr = curr->next;
 	}
 	return (0);

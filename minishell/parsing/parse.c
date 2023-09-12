@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 15:07:04 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:21:21 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	parser(char	*input, t_env *envi)
 
 void	initialize_sequence(t_token *new, t_env *envi, int index)
 {
+	new->temp = 0;
 	new->cmd = NULL;
 	new->issquote = 0;
 	new->arg = NULL;
@@ -76,4 +77,6 @@ void	initialize_sequence(t_token *new, t_env *envi, int index)
 	new->i = index;
 	new->arg_all = NULL;
 	new->end_of_file = NULL;
+	new->di = 0;
+	new->newstr = NULL;
 }

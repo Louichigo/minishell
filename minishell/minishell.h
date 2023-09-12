@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 17:28:50 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 19:24:27 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	int					exit;
+	int					exit_status;
 	int					isbquote;
 	int					issquote;
 	int					type;
@@ -59,6 +60,7 @@ typedef struct s_token
 	int					di;
 	int					nbc;
 	int					pos;
+	int					temp;
 	int					env_len;
 	int					file_type;
 	int					fdwrite;
@@ -92,7 +94,7 @@ void	free_token(t_token **token);
 void	free_double(t_token *token);
 void	ft_freeenv(t_env *env);
 void	ft_export(t_env *env, char *name, char *value);
-void	ft_unset(t_env **env, char *name);
+void	ft_unset(t_env *env, char *name);
 void	signalsinit(void);
 void	ft_putstr_fd(char *s, int fd);
 void	add_tab(t_token *token, int new);
@@ -123,7 +125,7 @@ void	exec_cmds(t_token *token, t_env *env);
 void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	analyse_arg(char *str, t_token *s, t_env *env);
-void	check_dollar(char *str, t_env *env);
+void	check_dollar(int len, char *str, t_env *env);
 
 int		ft_pwd(void);
 int		ft_env(t_env **env, t_token *s);

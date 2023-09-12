@@ -3,54 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 15:07:14 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:10:38 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
-	t_env *temp;
+
+void	remove_node(t_env **env)
+{
+	t_env	*temp;
 
 	temp = *env;
 	if (temp->next == NULL)
 	{
 		*env = NULL;
-		return;
+		return ;
 	}
 	*env = (*env)->next;
 	(*env)->previous = NULL;
+	temp->name = NULL;
 	free(temp->name);
+	temp->value = NULL;
 	free(temp->value);
+	temp = NULL;
 	free(temp);
 }
-*/
-void	ft_unset(t_env **env, char *name)
+
+void	ft_freeb(t_env *curr)
+{
+	free(curr->value);
+	free(curr->name);
+	curr = NULL;
+	free(curr);
+}
+
+void	ft_unset(t_env *env, char *name)
 {
 	t_env	*curr;
 
-	curr = *env;
+	curr = env;
 	while (curr)
 	{
 		if (ft_strcmp(curr->name, name) == 0)
 		{
 			if (!curr->previous)
 			{
-				t_env *temp;
-
-				temp = *env;
-				if (temp->next == NULL)
-				{
-					*env = NULL;
-					return;
-				}
-				*env = (*env)->next;
-				(*env)->previous = NULL;
-				free(temp->name);
-				free(temp->value);
-				free(temp);
+				remove_node(&curr);
 				return ;
 			}
 			else if (!curr->next)
@@ -60,11 +61,7 @@ void	ft_unset(t_env **env, char *name)
 				curr->previous->next = curr->next;
 				curr->next->previous = curr->previous;
 			}
-			free(curr->value);
-			free(curr->name);
-			curr = NULL;
-			free(curr);
-			return ;
+			return (ft_freeb(curr));
 		}
 		if (!curr->next)
 			break ;
@@ -77,7 +74,7 @@ int	ft_unset_parse(t_token *s, t_env *env)
 	char	*str;
 
 	str = ft_dechar(s->arg);
-	ft_unset(&env, str);
+	ft_unset(env, str);
 	free(str);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 17:59:29 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 18:11:09 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	exec_cmd(t_token *s, t_env *env)
 
 	init_stdin = dup(STDIN_FILENO);
 	init_stdout = dup(STDOUT_FILENO);
+	s->exit_status = 0;
+	g_globalv = 42;
 	if (s->fdread >= 3)
 		dup2(s->fdread, STDIN_FILENO);
 	if (s->fdwrite >= 3)
@@ -97,5 +99,4 @@ void	exec_external(t_token *s, t_env *env)
 		if (WIFEXITED(exit_status))
 			g_globalv = WEXITSTATUS(exit_status);
 	}
-
 }

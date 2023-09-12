@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 15:06:32 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:28:10 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	ft_echo_parse(t_token *s, t_env *env)
 
 void	analyse_arg(char *str, t_token *s, t_env *env)
 {
-	s->di = 0;
-	s->newstr = NULL;
 	while (str[s->di] != '\0')
 	{
 		while (str[s->di] != '$' && str[s->di] != '\0')
@@ -87,17 +85,17 @@ void	analyse_arg(char *str, t_token *s, t_env *env)
 			s->newstr = malloc(sizeof(char) * s->len);
 			while (str[s->c] != '\0' && str[s->c] != '$' && str[s->c] != 32)
 				s->newstr[s->dj++] = str[s->c++];
-			s->newstr[s->dj] = '\0';
-			check_dollar(s->newstr, env);
+			check_dollar(s->dj, s->newstr, env);
 		}
 	}
 }
 
-void	check_dollar(char *str, t_env *env)
+void	check_dollar(int len, char *str, t_env *env)
 {
 	t_env	*curr;
 
 	curr = env;
+	str[len] = '\0';
 	while (curr)
 	{
 		if (ft_strcmp(curr->name, str) == 0)
