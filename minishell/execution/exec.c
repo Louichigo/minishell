@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 17:24:02 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/12 17:59:29 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	exec_cmd(t_token *s, t_env *env)
 
 	init_stdin = dup(STDIN_FILENO);
 	init_stdout = dup(STDOUT_FILENO);
-	s->exit_status = 0;
-	g_globalv = 42;
 	if (s->fdread >= 3)
 		dup2(s->fdread, STDIN_FILENO);
 	if (s->fdwrite >= 3)
