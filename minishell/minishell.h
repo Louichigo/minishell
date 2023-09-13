@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 11:28:44 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:57:59 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	exec_cmds(t_token *token, t_env *env);
 void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	analyse_arg(char *str, t_token *s, t_env *env);
-void	check_dollar(int len, char *str, t_env *env);
+void	check_dollar(t_token *s, int len, char *str, t_env *env);
 
 int		ft_pwd(void);
 int		ft_env(t_env **env, t_token *s);
@@ -152,7 +152,6 @@ int		mystrcspn(char *s, char *reject, int i);
 int		iscontained(char *here, char *eof);
 int		isword(char *here, char *eof, int index);
 int		exit_error(char *str);
-int		ft_ismaj(char *str);
 
 t_env	*init_env(char **envp);
 

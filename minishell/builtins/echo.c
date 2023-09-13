@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 11:45:27 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:01:52 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_echo(int arg, char *str, t_token *s, t_env *env)
 	{
 		if (str[i] == '$' && s->issquote != 1)
 		{
+			s->di = 0;
+			s->newstr = NULL;
 			analyse_arg(&str[i], s, env);
 			break ;
 		}
@@ -85,16 +87,17 @@ void	analyse_arg(char *str, t_token *s, t_env *env)
 			s->newstr = malloc(sizeof(char) * s->len);
 			while (str[s->c] != '\0' && str[s->c] != '$' && str[s->c] != 32)
 				s->newstr[s->dj++] = str[s->c++];
-			check_dollar(s->dj, s->newstr, env);
+			check_dollar(s, s->dj, s->newstr, env);
 		}
 	}
 }
 
-void	check_dollar(int len, char *str, t_env *env)
+void	check_dollar(t_token *s, int len, char *str, t_env *env)
 {
 	t_env	*curr;
 
 	curr = env;
+	(void)s;
 	str[len] = '\0';
 	while (curr)
 	{
