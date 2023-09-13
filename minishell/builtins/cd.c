@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:46:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 13:31:57 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:52:02 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	ft_cd(t_env *env, char *str)
 	cwd = malloc(PATH_MAX);
 	getcwd(cwd, PATH_MAX);
 	if (cd_cond(env, str) != 0)
+	{
+		free(cwd);
 		return (1);
+	}
 	ft_export(env, "OLDPWD", cwd);
 	free(cwd);
 	cwd = malloc(PATH_MAX);

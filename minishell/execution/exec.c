@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 14:26:00 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:57:37 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	exec_external(t_token *s, t_env *env)
 	parse_exec(s);
 	if (g_globalv == 1)
 		g_globalv = 42;
-	else
+	else if (g_globalv != 0)
 		g_globalv = 43;
 	pid = fork();
 	if (pid == -1)

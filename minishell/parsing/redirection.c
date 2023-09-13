@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:42:53 by cgross            #+#    #+#             */
-/*   Updated: 2023/09/06 15:53:55 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:58:41 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	r_left(t_token	*new, char *input)
 void	rr_left(t_token	*new, char *input)
 {
 	new->i++;
-	new->end_of_file = malloc(sizeof(char) * word_len(input, new->i));
 	new->end_of_file = get_filename(new, input);
 	if (new->fdread == -1)
 	{
