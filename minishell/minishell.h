@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 16:01:26 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:33:28 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,12 @@ enum e_token {
 };
 
 void	ft_echo(int arg, char *str, t_token *s, t_env *env);
-void	ft_exit(t_env *env, t_token *tok, int i);
+void	ft_exit(t_token *tok, int i);
 void	exec_cmd(t_token *s, t_env *env);
 void	exec_external(t_token *token, t_env *env);
 void	ft_free(char **str);
 void	free_token(t_token **token);
 void	free_double(t_token *token);
-void	ft_freeenv(t_env *env);
 void	ft_export(t_env *env, char *name, char *value);
 void	ft_unset(t_env *env, char *name);
 void	signalsinit(void);
@@ -133,7 +132,7 @@ void	print_error(t_token *s);
 
 int		ft_pwd(void);
 int		ft_env(t_env **env, t_token *s);
-int		ft_exit_parse(t_token *s, t_env *env);
+int		ft_exit_parse(t_token *s);
 int		ft_cd(t_env *env, char *str);
 int		cd_cond(t_env *env, char *str);
 int		exec_builtin(t_token *s, t_env *env);

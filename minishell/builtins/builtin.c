@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:52:09 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/08 14:28:08 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:33:05 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_builtin(t_token *s)
 int	exec_builtin(t_token *s, t_env *env)
 {
 	if (ft_strcmp(s->cmd, "exit") == 0)
-		g_globalv = ft_exit_parse(s, env);
+		g_globalv = ft_exit_parse(s);
 	else if (ft_strcmp(s->cmd, "env") == 0)
 		g_globalv = ft_env(&env, s);
 	else if (ft_strcmp(s->cmd, "unset") == 0)
