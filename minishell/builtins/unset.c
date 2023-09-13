@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 19:10:38 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:28:33 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_freeb(t_env *curr)
 {
 	free(curr->value);
 	free(curr->name);
-	curr = NULL;
 	free(curr);
+	curr = NULL;
 }
 
 void	ft_unset(t_env *env, char *name)

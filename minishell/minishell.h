@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 11:57:59 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:42:08 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ enum e_token {
 };
 
 void	ft_echo(int arg, char *str, t_token *s, t_env *env);
-void	ft_exit(t_env *env, int i);
+void	ft_exit(t_env *env, t_token *tok, int i);
 void	exec_cmd(t_token *s, t_env *env);
 void	exec_external(t_token *token, t_env *env);
 void	ft_free(char **str);
@@ -168,8 +168,6 @@ char	*ft_strdup(const char *s1);
 char	*ft_splitname(char *str);
 char	*ft_splitvalue(char *str);
 char	*ft_dechar(char **str);
-char	*ft_echon(char **str, int i);
-char	*if_dollar(t_token *s, t_env *env, char *str);
 char	*find_var(t_env *env, char *name);
 char	*ft_itoa(int n);
 char	*get_filename(t_token *new, char *input);
