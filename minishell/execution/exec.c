@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 18:11:09 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:43:59 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	exec_cmd(t_token *s, t_env *env)
 	init_stdin = dup(STDIN_FILENO);
 	init_stdout = dup(STDOUT_FILENO);
 	s->exit_status = 0;
-	g_globalv = 42;
 	if (s->fdread >= 3)
 		dup2(s->fdread, STDIN_FILENO);
 	if (s->fdwrite >= 3)
@@ -84,6 +83,7 @@ void	exec_external(t_token *s, t_env *env)
 	int		exit_status;
 
 	parse_exec(s);
+	g_globalv = 42;
 	pid = fork();
 	if (pid == -1)
 		perror("minishell: fork error");
