@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:22:08 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 12:01:52 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:34:07 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	analyse_arg(char *str, t_token *s, t_env *env)
 		s->dj = 0;
 		if (str[s->di] == '?')
 		{
-			write(1, ft_itoa(g_globalv), ft_strlen(ft_itoa(g_globalv)));
+			ft_itog();
 			s->di++;
 		}
 		else
@@ -90,6 +90,15 @@ void	analyse_arg(char *str, t_token *s, t_env *env)
 			check_dollar(s, s->dj, s->newstr, env);
 		}
 	}
+}
+
+void	ft_itog(void)
+{
+	char	*str;
+
+	str = ft_itoa(g_globalv);
+	write(1, str, ft_strlen(str));
+	free(str);
 }
 
 void	check_dollar(t_token *s, int len, char *str, t_env *env)

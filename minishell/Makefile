@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+         #
+#    By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/11 16:59:33 by lobertho          #+#    #+#              #
-#    Updated: 2023/09/12 19:13:04 by lobertho         ###   ########.fr        #
+#    Updated: 2023/09/13 13:58:47 by lobertho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

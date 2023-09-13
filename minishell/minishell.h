@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 13:42:08 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:33:34 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_token
 	int					fdwrite;
 	int					fdread;
 	char				*newstr;
+	char				*itoa;
 	char				*exportname;
 	char				*exportvalue;
 	char				*end_of_file;
@@ -127,6 +128,7 @@ void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	analyse_arg(char *str, t_token *s, t_env *env);
 void	check_dollar(t_token *s, int len, char *str, t_env *env);
+void	ft_itog(void);
 
 int		ft_pwd(void);
 int		ft_env(t_env **env, t_token *s);

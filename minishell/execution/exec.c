@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 11:43:59 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:26:00 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	exec_external(t_token *s, t_env *env)
 	int		exit_status;
 
 	parse_exec(s);
-	g_globalv = 42;
+	if (g_globalv == 1)
+		g_globalv = 42;
+	else
+		g_globalv = 43;
 	pid = fork();
 	if (pid == -1)
 		perror("minishell: fork error");
