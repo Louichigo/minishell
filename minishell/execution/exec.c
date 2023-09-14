@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 15:57:37 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:45:24 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	execution(t_token *s, t_env *env)
 {
+	int	exit_status;
+
 	if (!s->next)
 	{
 		exec_cmd(s, env);
@@ -21,7 +23,17 @@ void	execution(t_token *s, t_env *env)
 			ft_free(s->arg_all);
 	}
 	else
-		exec_cmds(s, env);
+	{
+		while (s)
+		{
+			exec_cmds(s, env);
+			while (waitpid(-1, &exit_status, 0) > 0)
+				;
+			if (WIFEXITED(exit_status))
+				g_globalv = WEXITSTATUS(exit_status);
+			s = s->next;
+		}
+	}
 }
 
 void	exec_cmd(t_token *s, t_env *env)

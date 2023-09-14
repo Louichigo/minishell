@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:15:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 11:37:11 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:45:26 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,18 @@ void	exec_cmds(t_token *token, t_env *env)
 {
 	int		fd_pipe_tmp;
 	int		fd_pipe[2];
-	int		exit_status;
 	pid_t	fork_pid;
 
 	fd_pipe_tmp = 0;
-	while (token)
+	pipe(fd_pipe);
+	fork_pid = fork();
+	if (fork_pid == 0)
 	{
-		pipe(fd_pipe);
-		fork_pid = fork();
-		if (fork_pid == 0)
-		{
-			prep_fd(token, &fd_pipe_tmp, fd_pipe);
-			exec_cmd(token, env);
-			exit(g_globalv);
-		}
-		close_fd(token, &fd_pipe_tmp, fd_pipe);
-		token = token->next;
+		prep_fd(token, &fd_pipe_tmp, fd_pipe);
+		exec_cmd(token, env);
+		exit(g_globalv);
 	}
-	while (waitpid(-1, &exit_status, 0) > 0)
-		;
-	if (WIFEXITED(exit_status))
-		g_globalv = WEXITSTATUS(exit_status);
+	close_fd(token, &fd_pipe_tmp, fd_pipe);
 }
 
 void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe)

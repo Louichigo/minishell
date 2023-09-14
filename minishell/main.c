@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 16:34:06 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:24:55 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	checkarg(argc);
 	env = init_env(envp);
-	init_termios();
 	signalsinit();
 	while (42)
 	{
+		init_termios();
+		signalsinit();
 		input = readline("minishell >> ");
 		if (!input)
 			ft_exit(NULL, 0);
