@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:42:53 by cgross            #+#    #+#             */
-/*   Updated: 2023/09/13 15:58:41 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:20:09 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	rr_left(t_token	*new, char *input)
 		g_globalv = 1;
 		return ;
 	}
-	new->file_type = R_LEFT;
+	new->file_type = RR_LEFT;
 	heredoc(new, input);
 }
 
