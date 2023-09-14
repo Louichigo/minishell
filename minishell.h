@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/14 15:35:30 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:33:28 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ int		mystrcspn(char *s, char *reject, int i);
 int		iscontained(char *here, char *eof);
 int		isword(char *here, char *eof, int index);
 int		exit_error(char *str);
-int		mute_stuff(t_token *tok);
 
 t_env	*init_env(char **envp);
 
