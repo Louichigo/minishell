@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/15 00:08:32 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:35:05 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ enum e_token {
 
 void	ft_echo(int arg, char *str, t_token *s, t_env *env);
 void	ft_exit(t_token *tok, int i);
-void	exec_cmd(t_token *s, t_env *env);
-void	exec_external(t_token *token, t_env *env);
+void	exec_cmd(t_token *s, t_env *env, char **envp);
+void	exec_external(t_token *token, t_env *env, char **envp);
 void	ft_free(char **str);
 void	free_token(t_token **token);
 void	free_double(t_token *token);
@@ -99,7 +99,7 @@ void	ft_unset(t_env *env, char *name);
 void	signalsinit(void);
 void	ft_putstr_fd(char *s, int fd);
 void	add_tab(t_token *token, int new);
-void	execution(t_token *s, t_env *env);
+void	execution(t_token *s, t_env *env, char **envp);
 void	parse_exec(t_token *s);
 void	ft_error(t_token *s, char *cmd);
 void	init_termios(void);
@@ -119,10 +119,10 @@ void	r_left(t_token *new, char *input);
 void	rr_left(t_token *new, char *input);
 void	r_right(t_token *new, char *input);
 void	rr_right(t_token *new, char *input);
-void	parser(char	*input, t_env *envi);
+void	parser(char	*input, t_env *envi, char **envp);
 void	initialize_sequence(t_token *new, t_env *envi, int index);
 void	error(char *str);
-void	exec_cmds(t_token *token, t_env *env);
+void	exec_cmds(t_token *token, t_env *env, char **envp);
 void	prep_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	close_fd(t_token *token, int *fd_pipe_tmp, int *fd_pipe);
 void	analyse_arg(char *str, t_token *s, t_env *env);

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:12:13 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/15 00:08:42 by cgross           ###   ########.fr       */
+/*   Updated: 2023/09/15 11:37:18 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	print_error(t_token *s)
 	ft_putstr_fd(": No such file or directory\n", 2);
 }
 
-int		mute_stuff(t_token *tok)
+int	mute_stuff(t_token *tok)
 {
 	if (tok->cmd[0] == '\0')
 		return (1);

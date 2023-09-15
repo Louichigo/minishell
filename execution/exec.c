@@ -6,25 +6,25 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:17:49 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 15:57:37 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:33:23 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execution(t_token *s, t_env *env)
+void	execution(t_token *s, t_env *env, char **envp)
 {
 	if (!s->next)
 	{
-		exec_cmd(s, env);
+		exec_cmd(s, env, envp);
 		if (is_builtin(s) != 1)
 			ft_free(s->arg_all);
 	}
 	else
-		exec_cmds(s, env);
+		exec_cmds(s, env, envp);
 }
 
-void	exec_cmd(t_token *s, t_env *env)
+void	exec_cmd(t_token *s, t_env *env, char **envp)
 {
 	int	init_stdin;
 	int	init_stdout;
@@ -39,7 +39,7 @@ void	exec_cmd(t_token *s, t_env *env)
 	if (is_builtin(s) == 1)
 		exec_builtin(s, env);
 	else
-		exec_external(s, env);
+		exec_external(s, env, envp);
 	if (s->fdread >= 3)
 		close(s->fdread);
 	if (s->fdwrite >= 3)
@@ -77,7 +77,7 @@ void	parse_exec(t_token *s)
 	s->arg_all[i] = NULL;
 }
 
-void	exec_external(t_token *s, t_env *env)
+void	exec_external(t_token *s, t_env *env, char **envp)
 {
 	pid_t	pid;
 	int		exit_status;
@@ -92,7 +92,7 @@ void	exec_external(t_token *s, t_env *env)
 		perror("minishell: fork error");
 	if (pid == 0)
 	{
-		if (execve(get_right_path(env, *s->arg_all), s->arg_all, NULL) == -1)
+		if (execve(get_right_path(env, *s->arg_all), s->arg_all, envp) == -1)
 			ft_error(s, *s->arg_all);
 		exit(g_globalv);
 	}

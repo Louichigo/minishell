@@ -6,13 +6,13 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:15:33 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 11:37:11 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:33:11 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_cmds(t_token *token, t_env *env)
+void	exec_cmds(t_token *token, t_env *env, char **envp)
 {
 	int		fd_pipe_tmp;
 	int		fd_pipe[2];
@@ -27,7 +27,7 @@ void	exec_cmds(t_token *token, t_env *env)
 		if (fork_pid == 0)
 		{
 			prep_fd(token, &fd_pipe_tmp, fd_pipe);
-			exec_cmd(token, env);
+			exec_cmd(token, env, envp);
 			exit(g_globalv);
 		}
 		close_fd(token, &fd_pipe_tmp, fd_pipe);

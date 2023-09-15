@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:31:28 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/12 19:21:21 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:36:24 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	check_quotes(char *input)
 	return (closed);
 }
 
-void	parser(char	*input, t_env *envi)
+void	parser(char	*input, t_env *envi, char **envp)
 {
 	t_token	*head;
 	int		i;
@@ -56,7 +56,7 @@ void	parser(char	*input, t_env *envi)
 	}
 	if (!head->error)
 	{
-		execution(head, envi);
+		execution(head, envi, envp);
 	}
 	free_token(&head);
 }

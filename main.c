@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:06 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 16:34:06 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:34:15 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		else
 		{
-			parser(input, env);
+			parser(input, env, envp);
 			add_history(input);
 			free(input);
 		}
