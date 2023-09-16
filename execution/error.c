@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:12:13 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/15 11:37:18 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/16 11:04:04 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,14 @@ void	ft_error(t_token *s, char *cmd)
 		ft_putstr_fd(": command not found\n", 2);
 		free(s->itoa);
 	}
-	g_globalv = 127;
+	g_globalv = mr_bricolage(s);
+}
+
+int	mr_bricolage(t_token *s)
+{
+	if (s->next != NULL)
+		return (0);
+	return (127);
 }
 
 void	error(char *str)

@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:51:19 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/15 11:35:05 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/16 11:02:19 by cgross           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int		iscontained(char *here, char *eof);
 int		isword(char *here, char *eof, int index);
 int		exit_error(char *str);
 int		mute_stuff(t_token *tok);
+int		mr_bricolage(t_token *s);
 
 t_env	*init_env(char **envp);
 
