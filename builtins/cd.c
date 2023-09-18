@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:46:51 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 15:52:02 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:51:31 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*find_var(t_env *env, char *name)
 	curr = env;
 	while (curr)
 	{
-		if (strcmp(curr->name, name) == 0)
+		if (ft_strcmp(curr->name, name) == 0)
 		{
 			return (curr->value);
 		}

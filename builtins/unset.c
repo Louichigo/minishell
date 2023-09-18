@@ -6,7 +6,7 @@
 /*   By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:13:59 by lobertho          #+#    #+#             */
-/*   Updated: 2023/09/13 13:28:33 by lobertho         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:27:23 by lobertho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	ft_unset_parse(t_token *s, t_env *env)
 {
 	char	*str;
 
+	if (s->arg[0] == NULL)
+		return (0);
 	str = ft_dechar(s->arg);
 	ft_unset(env, str);
 	free(str);
