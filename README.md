@@ -1,2 +1,2 @@
-L'objectif de ce projet est de créer un simple shell.
+update makefile with your readline path. launch with ./minishell
 
