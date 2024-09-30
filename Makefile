@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lobertho <lobertho@student.42.fr>          +#+  +:+       +#+         #
+#    By: lobertho <lobertho@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/11 16:59:33 by lobertho          #+#    #+#              #
-#    Updated: 2023/09/13 16:35:57 by lobertho         ###   ########.fr        #
+#    Updated: 2024/09/30 19:28:07 by lobertho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ SRCS = $(wildcard *.c)	\
 
 OBJS = $(SRCS:.c=.o)
 
-RD_REPLACE = -L $(HOME)/.brew/Cellar/readline/8.2.1/lib -I $(HOME)/.brew/Cellar/readline/8.2.1/include
+RD_REPLACE = -L /opt/homebrew/Cellar/readline/8.2.13/lib -I /opt/homebrew/Cellar/readline/8.2.13/include
 
 NAME = minishell
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -lreadline $(RD_REPLACE)
+FLAGS = -Wall -Wextra -Werror $(RD_REPLACE) -lreadline
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -31,6 +31,7 @@ clean:
 					rm -f $(OBJS)
 
 fclean: clean
+					rm -rf minishell.dSYM
 					rm -f $(NAME)
 
 re:	fclean all
